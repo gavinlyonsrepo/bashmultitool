@@ -17,8 +17,8 @@ done
 function Test_Func
 {
 	#print
-	#BashMTFunc norm "hello World"
-	#BashMTFunc highlight "highlight World"
+	BashMTFunc norm "hello World"
+	BashMTFunc highlight "highlight World"
 	
 	
 	BashMTFunc black "black World"
@@ -46,7 +46,8 @@ function Test_Func
 	BashMTFunc makedir "/tmp/" "-TEST"
 	
 	#yesno
-	echo "do you want to continue?"
+	BashMTFunc norm  "Do you want to continue?"
+	BashMTFunc norm  "[y/n/q] :-"
 	BashMTFunc yesno
 		case $? in
 		0)
