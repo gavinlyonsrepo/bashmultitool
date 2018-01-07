@@ -63,9 +63,9 @@ The checknet section requires netcat installed.
 
 Features
 ----------------------
-The library contains two functions
+The library contains two functions.
 An errorhandler function and the main one
-BashMTFunc which contains nine sections 
+BashMTFunc which contains nine sections.
 
 * Colored printed text 16 options
 * Horizontal lines across terminal

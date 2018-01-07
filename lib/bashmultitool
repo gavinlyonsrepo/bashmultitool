@@ -84,7 +84,6 @@ case "$1" in
 	white) printf '%s\n' "${white}$2${normal}" ;;
 	
 	yesno) #print yes no quit prompt
-		printf '%s' "[y/n/q] :-"
 		local yesnoVar=""
 		while true; do
 			read -r yesnoVar
@@ -168,8 +167,8 @@ case "$1" in
 			printf '%s\n' "We have connectivity $2"
 			return 0
 		else
-			return 1
 			printf '%s\n' "${red}We do not have connectivity $2 ${normal}"
+			return 1
 		fi
 	;;
 	

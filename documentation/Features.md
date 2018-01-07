@@ -6,11 +6,11 @@ BashMTFunc [keyword][option1][option2][option3]
 
 * Colored printed text 16 options 
 
-The keyword represent the color the text to be printed is first option.
+The keyword represent the color, the text to be printed is first option.
 
 ```sh
 	BashMTFunc norm "normal text"
-	BashMTFunc highlight "highlight text"
+	BashMTFunc highlight "highlighted text"
 	BashMTFunc black "black Text"
 	BashMTFunc red "red Text"
 	BashMTFunc green "green Text"
@@ -44,6 +44,7 @@ Keyword is line, first option the character.
 Keyword is yesno , returns codes based on user input
 
 ```sh
+BashMTFunc norm  "Do you want to foo? [y/n/q] :"
 BashMTFunc yesno
 ```
 Returns 0 for yes , 1 for no , 255 for quit
@@ -53,7 +54,7 @@ Returns 0 for yes , 1 for no , 255 for quit
 Keyword is anykey , first option amended text.
 
 ```sh
-BashMTFunc anykey "my Text here"
+BashMTFunc anykey "my Text foo here"
 ```
 
 * Check website up
@@ -105,7 +106,7 @@ BashMTFunc distrocheck
 
 Returns 1-6 for unknown distro family groups or 255 for unknown.
 (1 redhat based, 2 fedora based, 3 debian based, 4 pacman based,
-5 gentoo based , slackware based.)
+5 gentoo based , 6 slackware based.)
 
 
 * Animation for  non-verbose process/commands that take long time

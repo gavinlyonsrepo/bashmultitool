@@ -2,7 +2,7 @@
 PREFIX ?= /usr
 
 all:
-	@echo Run \'make install\' to install gdrivemenu.
+	@echo Run \'make install\' to install  bashmultitool.
 
 install:
 	@echo 'Installing bashmultitool'
