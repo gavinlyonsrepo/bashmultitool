@@ -98,13 +98,14 @@ case "$1" in
 	;;
 	
 	makedir)
-		cd "$2" 
+		cd "$2" || errorhandlerBMTFunc "Cannot change to destination $2"
 		local dirVar=""
 		dirVar=$(date +%H%M-%d%b%y)"$3" 
-		mkdir "$dirVar"
-		cd "$dirVar" 
+		mkdir -p "$dirVar"
+		cd "$dirVar" || errorhandlerBMTFunc "Cannot change to destination $dirVar"
 		printf '%s\n' "Directory for output made at:-"
 		pwd	 
+		return 0
 	;;
 	
 	spin)
@@ -135,7 +136,7 @@ case "$1" in
 			
 			*) # unknown
 				printf '%s\n' "Error: Unsupported Linux distro"
-				return
+				return 255
 			;;
 		esac
 		
@@ -165,7 +166,9 @@ case "$1" in
 			#It checks passed website $1 on port 80 (HTTP).
 		if nc -zw1 "$2" 80; then
 			printf '%s\n' "We have connectivity $2"
+			return 0
 		else
+			return 1
 			printf '%s\n' "${red}We do not have connectivity $2 ${normal}"
 		fi
 	;;
@@ -194,7 +197,13 @@ case "$1" in
 			fi
 	;;
 	*) # Catch all typos 
-		printf '%s\n' "Error unknown input to BashMTFunc bashmultitool library file"
+		errorhandlerBMTFunc "Unknown input to BashMTFunc"
 	;;
 esac
+}
+
+function errorhandlerBMTFunc 
+{
+	printf '%s\n' "$1"
+	return 127
 }

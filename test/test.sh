@@ -67,7 +67,7 @@ function Test_Func
 	
 	# call spinner function put run in background and save PID
 	echo " "
-	spin &
+	BashMTFunc  spin &
 	pid=$!
 	
 	# do stuff

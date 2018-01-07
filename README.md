@@ -1,6 +1,4 @@
 
-### **Note: work in progress**
-
 Overview
 --------------------------------------------
 * Name: bashmultitool
@@ -17,57 +15,93 @@ Table of contents
   * [Table of contents](#table-of-contents)
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Files and setup](#files-and-setup)
-  * [Output and environment variables](#output-and-environment-variables)
+  * [Files](#files)
   * [Dependencies](#dependencies)
   * [Features](#features)
   * [Return codes](#return-codes)
-  * [See Also](#see-also)
   * [Communication](#communication)
   * [History](#history)
   * [Copyright](#copyright)
 
 Installation
 -----------------------------------------------
-TO-DO
+TO-DO Add to linux repos.
+
+A makefile is available for linux OS in this repository
+
 
 Usage
 -------------------------------------------
-TO-DO
+Source the library from your shell scripts
+
+```sh
+LIBPATH="/usr/lib/bashmultitool/"
+for MYFILE in "$LIBPATH"*;
+do
+	source "$MYFILE"
+done
+```
+
+To access functions from your shell scripts
+
+```sh
+BashMTFunc [keyword][options]
+```
 
 Files and setup
 -----------------------------------------
-TO-DO
 
-
-Output and environment variables
--------------------------------------
-TO-DO
+| File Path | Description |
+| ------ | ------ |
+| /usr/lib/bashmultitool/bashmultitool  | library file |
 
 Dependencies
 -------------------------------------
-TO-DO
+The checknet section requires netcat installed. 
+
+[Netcat](https://en.wikipedia.org/wiki/Netcat)
 
 Features
 ----------------------
-TO-DO
+The library contains two functions
+An errorhandler function and the main one
+BashMTFunc which contains nine sections 
+
+* Colored printed text 16 options
+* Horizontal lines across terminal
+* Yes-no-Quit prompt
+* Anykey prompt
+* Check website up
+* Check package installed
+* Make formated directory
+* Linux distro family checker
+* Animation for long non-verbose commands
+
+For full details see 
+Features.md in documentation section 
+[Features file](documentation/Features.md)
 
 Return codes
 ---------------------
-TO-DO
+Returns code dependent on which section called.
+The error Handler function returns 127 if called.
 
-See Also
------------
-TO-DO
 
 Communication
 -----------
-TO-DO
+If you should find a bug or you have any other query, 
+please send a report.
+Pull requests, suggestions for improvements
+and new features welcome.
+* Contact: Upstream repo at github site below or glyons66@hotmail.com
+* Upstream repository: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
 
 History
 ------------------
-TO-DO
+* See changelog.md in documentation section for version control history
  
 Copyright
 ---------
-TO-DO
+Copyright (C) 2018 Gavin Lyons MIT expat
+See LICENSE.md in documentation section 
+for more details
