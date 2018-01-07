@@ -10,7 +10,7 @@ install:
 	@mkdir -vp $(PREFIX)/lib/bashmultitool/
 	
 	@echo 'Installing library file...'
-	@cp -vp bashmultitool $(PREFIX)/lib/bashmultitool/
+	@cp -vp lib/bashmultitool $(PREFIX)/lib/bashmultitool/
 	
 	@echo 'DONE!'
 
