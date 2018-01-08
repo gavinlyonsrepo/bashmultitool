@@ -16,6 +16,11 @@ done
 
 function Test_Func
 {
+	#intcheck
+	BashMTFunc norm "Enter Server ID from list"
+	read -r ID
+	BashMTFunc intcheck "$ID"
+	echo "$?"
 	#print
 	BashMTFunc norm "hello World"
 	BashMTFunc highlight "highlight World"

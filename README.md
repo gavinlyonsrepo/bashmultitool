@@ -5,7 +5,7 @@ Overview
 * Title : Bash Shell library file for commonly used functions.
 * Description: A Bash Shell library file for commonly used functions
 can be imported into shell scripts to create functional and colorful 
-scripts and Terminal users interfaces
+scripts and Terminal users interfaces(TUI).
 * Author: Gavin Lyons
 
 Table of contents
@@ -65,7 +65,7 @@ Features
 ----------------------
 The library contains two functions.
 An errorhandler function and the main one
-BashMTFunc which contains nine sections.
+BashMTFunc which contains 10 sections.
 
 * Colored printed text 16 options
 * Horizontal lines across terminal
@@ -76,6 +76,7 @@ BashMTFunc which contains nine sections.
 * Make formated directory
 * Linux distro family checker
 * Animation for long non-verbose commands
+* integer check
 
 For full details see 
 Features.md in documentation section 

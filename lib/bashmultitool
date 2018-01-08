@@ -195,6 +195,18 @@ case "$1" in
 				return 255
 			fi
 	;;
+	
+	intcheck)
+		if [[ "$1" != *[!0-9]* ]]; 
+			then
+			#integer
+			return 0
+		else
+			#not an integer
+			return 1 
+		fi
+	;;
+	
 	*) # Catch all typos 
 		errorhandlerBMTFunc "Unknown input to BashMTFunc"
 	;;

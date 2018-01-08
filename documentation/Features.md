@@ -125,3 +125,13 @@ Returns 1-6 for unknown distro family groups or 255 for unknown.
 	kill $pid 
 	echo " "
 ```
+
+* integer check
+
+Keyword intcheck, first option the item to be checked if integer
+
+```sh
+BashMTFunc intcheck "$ID_VAR"
+```
+
+Retruns 0 for integer , 1 for non integer.
