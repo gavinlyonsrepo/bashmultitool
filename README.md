@@ -25,9 +25,30 @@ Table of contents
 
 Installation
 -----------------------------------------------
-TO-DO Add to linux repos.
+A Personal Package Archives (PPA) has been created on Ubuntu
+package building and hosting section of launchpad site 
+called bashmultitool.
 
-A makefile is available for linux OS in this repository
+Package built only for on Ubuntu 16.04 LTS (Xenial Xerus) 
+
+To install this on your system run commands in terminal
+
+```sh
+sudo add-apt-repository ppa:typematrix/bashmultitool
+sudo apt update
+sudo apt install bashmultitool
+```
+
+**or** Download latest fixed release and copy files manually as per file section table.
+
+**or** Download latest fixed release  and run the makefile as per 
+terminal commands below for version 1.0 latest release at time of writing
+
+```sh
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.0.tar.gz | tar xz
+cd  bashmultitool-1.0
+sudo make install
+```
 
 
 Usage

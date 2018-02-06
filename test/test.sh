@@ -2,7 +2,7 @@
 
 #=========================HEADER==========================================
 #name: test.sh
-#Description: test file for bahsmultitool
+#Description: test file for bashmultitool
 #Written : Gavin Lyons
 
 #====================FUNCTIONS===============================
@@ -16,6 +16,10 @@ done
 
 function Test_Func
 {
+	#error handling
+	BashMTFunc
+	BashMTFunc foo
+	
 	#intcheck
 	BashMTFunc norm "Enter Server ID from list"
 	read -r ID

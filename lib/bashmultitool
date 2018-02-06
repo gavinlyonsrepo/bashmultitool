@@ -10,16 +10,10 @@
 #Version: 1.0
 #License: MIT expat
 #Written: Gavin Lyons
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
 
 #====================FUNCTIONS===============================
 
-#FUNCTION HEADER
-# NAME: 
-# DESCRIPTION:   
-# INPUTS: 
-# OUTPUTS:
-# PROCESS:
-# NOTES:
 function BashMTFunc
 {
 	
