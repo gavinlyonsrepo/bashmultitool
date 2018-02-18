@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#=========================HEADER==========================================
+#FileName: bmtMisc 
+#Function: Contains miscellaneous utilities.  
+#library name: bashmultitool
+#Written: Gavin Lyons
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
+
+#====================FUNCTIONS===============================
+
+function bmtMiscFunc
+{
+local   red=$(printf "\033[0;31m")
+local	normal=$(printf "\033[0m")
+case "$1" in 
+
+	spin) # animation
+		local spinner=( Ooooo oOooo ooOoo oooOo ooooO oooOo ooOoo oOooo);
+		while true; do
+			for i in "${spinner[@]}"; 
+			do 
+				# no new line , \r reset line       
+				echo -ne "\r$i";
+				sleep 0.2;
+			done;
+		done
+	;;
+	
+	
+	checknet) # check if website up
+			#This uses netcat (nc) in its port scan mode, 
+			#a quick poke (-z is zero-I/O mode [used for 
+			#scanning]) with a quick timeout 
+			#(-w 1 waits at most one second
+			#It checks passed website $1 on port 80 (HTTP).
+		if nc -zw1 "$2" 80; then
+			printf '%s\n' "We have connectivity $2"
+			return 0
+		else
+			printf '%s\n' "${red}We do not have connectivity $2 ${normal}"
+			return 2
+		fi
+	;;
+	
+	
+	*) # Catch all users typos 
+		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtMisc: bmtMiscFunc"
+		return 127
+	;;
+esac
+}
+

@@ -11,11 +11,12 @@ install:
 	@mkdir -vp $(PREFIX)/lib/bashmultitool/
 	@mkdir -vp $(PREFIX)/share/doc/bashmultitool/
 	
-	@echo 'Installing library file...'
-	@cp -vp lib/bashmultitool $(PREFIX)/lib/bashmultitool/
+	@echo 'Installing library files...'
+	@cp -vp lib/* $(PREFIX)/lib/bashmultitool/
 	
-	@echo 'Installing Readme...'
+	@echo 'Installing Documentation...'
 	@cp -vp README.md  $(PREFIX)/share/doc/bashmultitool/
+	@cp -vp documentation/*  $(PREFIX)/share/doc/bashmultitool/
 	
 	@echo 'DONE!'
 

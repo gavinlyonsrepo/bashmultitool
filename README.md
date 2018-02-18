@@ -2,7 +2,7 @@
 Overview
 --------------------------------------------
 * Name: bashmultitool
-* Title : Bash Shell library file for commonly used functions.
+* Title : Bash Shell library  for commonly used functions.
 * Description: A Bash Shell library file for commonly used functions
 can be imported into shell scripts to create functional and colorful 
 scripts and Terminal users interfaces(TUI).
@@ -18,18 +18,17 @@ Table of contents
   * [Files](#files)
   * [Dependencies](#dependencies)
   * [Features](#features)
-  * [Return codes](#return-codes)
   * [Communication](#communication)
   * [History](#history)
   * [Copyright](#copyright)
 
 Installation
 -----------------------------------------------
+
+* Linux debian based systems using Ubuntu 16.04 LTS (Xenial Xerus) *
 A Personal Package Archives (PPA) has been created on Ubuntu
 package building and hosting section of launchpad site 
 called bashmultitool.
-
-Package built only for on Ubuntu 16.04 LTS (Xenial Xerus) 
 
 To install this on your system run commands in terminal
 
@@ -39,21 +38,20 @@ sudo apt update
 sudo apt install bashmultitool
 ```
 
-**or** Download latest fixed release and copy files manually as per file section table.
-
-**or** Download latest fixed release  and run the makefile as per 
-terminal commands below for version 1.0 latest release at time of writing
+* For other linux systems *
+Download latest fixed release  and run the makefile as per 
+terminal commands below for version 1.1 latest release at time of writing
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.0.tar.gz | tar xz
-cd  bashmultitool-1.0
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.1.tar.gz | tar xz
+cd  bashmultitool-1.1
 sudo make install
 ```
 
 
 Usage
 -------------------------------------------
-Source the library from your shell scripts
+Source the library from your bash shell scripts like so:
 
 ```sh
 LIBPATH="/usr/lib/bashmultitool/"
@@ -61,20 +59,27 @@ for MYFILE in "$LIBPATH"*;
 do
 	source "$MYFILE"
 done
-```
 
-To access functions from your shell scripts
+
+There are six files in library and are independent of each other
+you can source them individually if you wish.
+Each file has one function, To access functions from your shell scripts:
 
 ```sh
-BashMTFunc [keyword][options]
+[functionname] [keyword] [options]
 ```
+
 
 Files and setup
 -----------------------------------------
 
 | File Path | Description |
 | ------ | ------ |
-| /usr/lib/bashmultitool/bashmultitool  | library file |
+| /usr/lib/bashmultitool/bashmultitool/*  | 6 library files |
+| /usr/lib/bashmultitool/doc/README.md    | readme          |
+| /usr/lib/bashmultitool/doc/documentation/license.md | copyright |
+| /usr/lib/bashmultitool/doc/documentation/features.md | detailed information |
+| /usr/lib/bashmultitool/doc/documentation/chnagelog.md | history |  
 
 Dependencies
 -------------------------------------
@@ -84,29 +89,36 @@ The checknet section requires netcat installed.
 
 Features
 ----------------------
-The library contains two functions.
-An errorhandler function and the main one
-BashMTFunc which contains 10 sections.
+The library contains six files and six functions
+which contains 16 sections
 
-* Colored printed text 16 options
-* Horizontal lines across terminal
-* Yes-no-Quit prompt
-* Anykey prompt
-* Check website up
-* Check package installed
-* Make formated directory
-* Linux distro family checker
-* Animation for long non-verbose commands
-* integer check
+1) Colored printed text, eight colors, 5 modes.
+Colors: Black Red Green Yellow Blue Purple Cyan White.
+Modes: normal bold bright underline background.
+ 
+2) Horizontal lines across terminal
+3) yes-no-quit y/n/q prompt
+4) YES-no Y/n prompt
+5) yes-NO y/N prompt
+6) Anykey to continue prompt
+
+7) Check website up
+8) Spinner Animation for long non-verbose commands
+
+9) Check package installed
+10) Linux distro family checker
+11) Set text editor $EDITOR if not set
+
+12) Make formated directory
+13) check if directory exists and empty
+
+14) integer input check
+15) alphabet input check
+16) alpha input numeric check
 
 For full details see 
 Features.md in documentation section 
 [Features file](documentation/Features.md)
-
-Return codes
----------------------
-Returns code dependent on which section called.
-The error Handler function returns 127 if called.
 
 
 Communication

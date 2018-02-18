@@ -1,0 +1,52 @@
+#!/bin/bash
+
+#=========================HEADER==========================================
+#FileName: bmtFiles 
+#Function: Contains file related utilities   
+#library name: bashmultitool
+#Written: Gavin Lyons
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
+
+#====================FUNCTIONS===============================
+
+function bmtFilesFunc
+{
+	
+case "$1" in 
+	
+	isdirempty)
+		if [ -d "$2" ]; then
+			# the directory exists
+			local checkVar=0
+			checkVar=$(find "$2" -mindepth 1 -print | wc -l) 
+			if [  "$checkVar" == 0 ]; then
+				return 0 #not empty
+			else
+				return 2 #empty
+			fi
+		else #dir does not exist
+			return 3
+		fi
+	;;
+	
+	makedir) 
+		# make dir  makes a directory at path $2 with time/date stamp and enters it
+		# appends $3 to directory name
+		cd "$2" || return 255
+		local dirVar=""
+		dirVar=$(date +%H%M-%d%b%y)"$3" 
+		mkdir -p "$dirVar"
+		cd "$dirVar" || return 255
+		printf '%s\n' "Directory made at:-"
+		pwd
+		return 0
+	;;
+	
+	*) # Catch all user typos 
+		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtFiles : bmtFilesFunc"
+		return 127
+	;;
+esac
+}
+
+
