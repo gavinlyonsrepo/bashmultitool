@@ -25,7 +25,7 @@ Table of contents
 Installation
 -----------------------------------------------
 
-* Linux debian based systems using Ubuntu 16.04 LTS (Xenial Xerus) *
+**Linux debian based systems built on Ubuntu 16.04 LTS (Xenial Xerus)** 
 A Personal Package Archives (PPA) has been created on Ubuntu
 package building and hosting section of launchpad site 
 called bashmultitool.
@@ -38,13 +38,18 @@ sudo apt update
 sudo apt install bashmultitool
 ```
 
-* For other linux systems *
-Download latest fixed release  and run the makefile as per 
+**Linux Arch pacman based systems AUR**
+* AUR package name : bashmultitool
+* AUR maintainer : glyons
+* AUR location: https://aur.archlinux.org/packages/bashmultitool/
+
+**For other linux systems**
+Download latest fixed release and run the makefile as per 
 terminal commands below for version 1.1 latest release at time of writing
 
 ```sh
 curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.1.tar.gz | tar xz
-cd  bashmultitool-1.1
+cd  BashMultiTool-1.1
 sudo make install
 ```
 
@@ -60,7 +65,7 @@ do
 	source "$MYFILE"
 done
 
-#
+
 ```
 
 There are six files in library and are independent of each other
