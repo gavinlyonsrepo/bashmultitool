@@ -60,14 +60,15 @@ do
 	source "$MYFILE"
 done
 
+#
+```
 
 There are six files in library and are independent of each other
 you can source them individually if you wish.
 Each file has one function, To access functions from your shell scripts:
 
-```sh
 [functionname] [keyword] [options]
-```
+
 
 
 Files and setup
@@ -79,7 +80,7 @@ Files and setup
 | /usr/lib/bashmultitool/doc/README.md    | readme          |
 | /usr/lib/bashmultitool/doc/documentation/license.md | copyright |
 | /usr/lib/bashmultitool/doc/documentation/features.md | detailed information |
-| /usr/lib/bashmultitool/doc/documentation/chnagelog.md | history |  
+| /usr/lib/bashmultitool/doc/documentation/changelog.md | history |  
 
 Dependencies
 -------------------------------------
@@ -93,7 +94,9 @@ The library contains six files and six functions
 which contains 16 sections
 
 1) Colored printed text, eight colors, 5 modes.
+
 Colors: Black Red Green Yellow Blue Purple Cyan White.
+
 Modes: normal bold bright underline background.
  
 2) Horizontal lines across terminal

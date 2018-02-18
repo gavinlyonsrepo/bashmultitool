@@ -1,4 +1,4 @@
-### Features of bashmultitool
+# Features of bashmultitool
 
 Features
 ----------------------
@@ -35,8 +35,8 @@ Modes: normal bold bright underline background.
 |  bmtFiles | bmtFilesFunc | 12-13 |
 |  bmtLinux | bmtLinuxFunc | 9-11 |
 |  bmtMisc  | bmtMiscFunc  | 7-8  |
-|  bmtPrint | bmtPrintFunc | 1 |
 |  bmtPrompt | bmtPromptFunc | 2-6| 
+|  bmtPrint | bmtPrintFunc | 1 |
 
 
 ## Usage 
@@ -45,7 +45,8 @@ Modes: normal bold bright underline background.
 [functioname] [keyword] [options]
 ```
 
-All functions return 127 and error message for user keyword typo error
+Note: All functions return code 127 and print an error message 
+for user keyword typo error
 
 1) Colored printed text  
 
