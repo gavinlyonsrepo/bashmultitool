@@ -52,7 +52,7 @@ terminal commands below for version 1.1 latest release at time of writing
 
 ```sh
 curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.1.tar.gz | tar xz
-cd  BashMultiTool-1.1
+cd  bashmultitool-1.1
 sudo make install
 ```
 
