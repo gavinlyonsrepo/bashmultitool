@@ -99,13 +99,18 @@ The checknet section requires netcat installed.
 Features
 ----------------------
 The library contains six files and six functions
-which contains 16 sections
+which contains 16 sections in total.
 
 1) Colored printed text, eight colors, 5 modes.
 
 Colors: Black Red Green Yellow Blue Purple Cyan White.
 
 Modes: normal bold bright underline background.
+
+for example:
+
+[[https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png|alt=example]] 
+ 
  
 2) Horizontal lines across terminal
 3) yes-no-quit y/n/q prompt
@@ -113,19 +118,19 @@ Modes: normal bold bright underline background.
 5) yes-NO y/N prompt
 6) Anykey to continue prompt
 
-7) Check website up
+7) Check if a website is up
 8) Spinner Animation for long non-verbose commands
 
 9) Check package installed
 10) Linux distro family checker
 11) Set text editor $EDITOR if not set
 
-12) Make formated directory
+12) Make and enter a formated directory
 13) check if directory exists and empty
 
-14) integer input check
-15) alphabet input check
-16) alpha input numeric check
+14) integer user input check
+15) alphabet user input check
+16) alphanumeric user input check
 
 For full details see 
 Features.md in documentation section 
