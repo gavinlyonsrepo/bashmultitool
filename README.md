@@ -108,8 +108,7 @@ Colors: Black Red Green Yellow Blue Purple Cyan White.
 Modes: normal bold bright underline background.
 
 for example:
-
-[[https://github.com/gavinlyonsrepo/bashmultitool/blob/master/screenshot/colour_print_example.png|alt=example]] 
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
  
  
 2) Horizontal lines across terminal
