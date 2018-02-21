@@ -92,7 +92,7 @@ Files and setup
 
 Dependencies
 -------------------------------------
-The checknet section requires netcat installed. 
+The check website section requires netcat installed. 
 
 [Netcat](https://en.wikipedia.org/wiki/Netcat)
 
@@ -109,7 +109,7 @@ Modes: normal bold bright underline background.
 
 for example:
 
-[[https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png|alt=example]] 
+[[https://github.com/gavinlyonsrepo/bashmultitool/blob/master/screenshot/colour_print_example.png|alt=example]] 
  
  
 2) Horizontal lines across terminal
