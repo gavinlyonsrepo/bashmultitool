@@ -127,7 +127,6 @@ Keyword is line, first option the character, second option is colour,
 if no colour passed default is "bold cyan"
 
 ```sh
-	#line
 	bmtPromptFunc line    "=" 
 	bmtPromptFunc line    "8" red
 ```
@@ -170,12 +169,12 @@ Keyword is quitno , returns codes based on user input
 second option quit for quit default
 
 ```sh
-echo "Do you want to foo? [Y/n] :"
+echo "Do you want to foo? [Q/n] :"
 bmtPromptFunc quitno quit
 ```
 Returns 2 for quit , 0 for no , 50 for bad user option
 
-7) Yes-no prompt [y/N] where no is default
+7) quit-NO prompt [q/N] where no is default
 
 Keyword is quitno , returns codes based on user input
 second option no for no default
@@ -207,7 +206,6 @@ bmtMiscFunc checknet "www.google.ie"
 
 ```sh
 	# call spinner section put run in background and save PID
-	echo " "
 	bmtMiscFunc  spin &
 	pid=$!
 	disown
@@ -215,13 +213,11 @@ bmtMiscFunc checknet "www.google.ie"
 	# 'do stuff'
 	echo "START"
 	find ~ -name mint 2>/dev/null 
-	echo " "
 	echo "END"
 	
 	# Stop spin function with PID
 	kill $pid 
 	sleep 2
-	echo " "
 ```
 
 11) Stop watch
@@ -379,5 +375,4 @@ Returns 0 for alphabet , 2 for non alphabet.
 ```sh
 	result2=$(bmtDataFunc trim "       test   "
 	echo $result2
-	echo " "
 ```
