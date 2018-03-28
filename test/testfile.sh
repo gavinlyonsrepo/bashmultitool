@@ -23,6 +23,8 @@ bmtLinuxFunc foo
 
 echo " "
 
+# 'dir empty '
+echo "DIREMPTY"
 bmtFilesFunc isdirempty "$HOME/Desktop/TEST/empty/"
 echo $?
 bmtFilesFunc isdirempty "$HOME/Desktop/TEST/file/"
@@ -32,12 +34,39 @@ echo $?
 bmtFilesFunc isdirempty "/foo/foo"
 echo $?
 echo " "
-            
+
+#make dir
+echo "MAKE DIR "            
 bmtFilesFunc makedir "/tmp/" "-TEST"
 echo $?
 bmtFilesFunc makedir "/foo/" "-foo"
 echo $?
+echo " "
 
+# dir exists
+echo "DIR exist " 
+bmtFilesFunc directoryexists /tmp/foo
+echo $?
+bmtFilesFunc directoryexists /tmp/
+echo $?
+echo " "
+
+#file exists
+echo "file exist " 
+bmtFilesFunc fileexists /tmp/foo
+echo $?
+bmtFilesFunc fileexists /tmp/temp
+echo $?
+echo " "
+
+
+#device exists
+echo "device exist " 
+bmtFilesFunc deviceexists /dev/sdf
+echo $?
+bmtFilesFunc deviceexists /dev/sda
+echo $?
+echo " "
 }
 
 #==================MAIN CODE=============================

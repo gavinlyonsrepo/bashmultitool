@@ -48,11 +48,11 @@ sudo apt install bashmultitool
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 1.1 latest release at time of writing
+terminal commands below for version 1.2 latest release at time of writing
 
 ```sh
 curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.1.tar.gz | tar xz
-cd  bashmultitool-1.1
+cd  bashmultitool-1.2
 sudo make install
 ```
 
@@ -72,11 +72,11 @@ done
 ```
 
 There are six files in library and are independent of each other
-you can source them individually if you wish.
+you can source them individually if you wish, however prompt file IS 
+dependent on print.
 Each file has one function, To access functions from your shell scripts:
 
 [functionname] [keyword] [options]
-
 
 
 Files and setup
@@ -92,44 +92,56 @@ Files and setup
 
 Dependencies
 -------------------------------------
+GNU bash, version 4.3.48(1)-release 
+
 The check website section requires netcat installed. 
 
 [Netcat](https://en.wikipedia.org/wiki/Netcat)
 
+
 Features
 ----------------------
 The library contains six files and six functions
-which contains 16 sections in total.
+which contains 26 sections in total.
 
-1) Colored printed text, eight colors, 5 modes.
+1) Coloured printed text, eight colours, seven modes.
 
-Colors: Black Red Green Yellow Blue Purple Cyan White.
+Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 
-Modes: normal bold bright underline background.
+Modes: normal, bold, underline, background, hiy, bold hiy, background hiy 
+Where hiy = high intensity  
 
 for example:
+
+
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
  
  
-2) Horizontal lines across terminal
-3) yes-no-quit y/n/q prompt
-4) YES-no Y/n prompt
-5) yes-NO y/N prompt
-6) Anykey to continue prompt
-
-7) Check if a website is up
-8) Spinner Animation for long non-verbose commands
-
-9) Check package installed
-10) Linux distro family checker
-11) Set text editor $EDITOR if not set
-
-12) Make and enter a formated directory
-13) check if directory exists and empty
-
-14) integer user input check
-15) alphabet user input check
-16) alphanumeric user input check
+2) Horizontal lines across terminal in any colour
+3) yes-no-quit [y/n/q] prompt
+4) YES-no [Y/n] prompt
+5) yes-NO [y/N] prompt
+6) Anykey to continue prompt in any colour
+7) QUIT-no [Q/n] prompt
+8) quit-NO [q/N] prompt
+9) Check if a website is up
+10) Spinner Animation for long non-verbose commands
+11) Stopwatch / timer
+12) Check package installed
+13) Linux distro family checker
+14) Set text editor $EDITOR if not set
+15) log file handler
+16) Make and enter a formated directory
+17) check if directory exists and empty
+18) directory exists
+19) file exists
+20) device exists
+21) integer user input check
+22) alphabet user input check
+23) alphanumeric user input check
+24) convert string to lowercase
+25) convert string to uppercase
+26) trim whitespace from string
 
 For full details see 
 Features.md in documentation section 

@@ -42,7 +42,13 @@ function Test_Func
 	echo $EDITOR
 	bmtLinuxFunc isTextEdSet
 	echo "$?"
+	echo " "
 	
+	# logfile
+	echo "logfile"
+	bmtLinuxFunc log 342  "overflow" mylog /tmp/
+	bmtLinuxFunc log "WARNING" "overflow"  mylog /tmp/
+	bmtLinuxFunc log "INFO" "my measseg"  mylog /tmp/
 
 }
 

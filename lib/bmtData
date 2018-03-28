@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #=========================HEADER==========================================
-#FileName: bmtData 
-#Function: Contains Data utilities.  
+#FileName: bmtData
+#Function: Contains Data utilities.
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
@@ -11,38 +11,48 @@
 
 function bmtDataFunc
 {
-case "$1" in 
+	
+case "$1" in
 
-	intcheck) # Check for integer
-		if [[ "$2" != *[!0-9]* ]]; 
+	intcheck) # 1 
+		if [[ "$2" != *[!0-9]* ]];
 			then
 			#success an integer
 			return 0
 		fi
 	;;
-	
-	alphanumcheck)
-		if [[ "$2" != *[!0-9a-zA-Z]* ]]; 
+
+	alphanumcheck) #2
+		if [[ "$2" != *[!0-9a-zA-Z]* ]];
 			then
 			#success an alpha numeric string
 			return 0
 		fi
 	;;
-	
-	alphacheck)
-		if [[ "$2" != *[!a-zA-Z]* ]]; 
+
+	alphacheck) # 3
+		if [[ "$2" != *[!a-zA-Z]* ]];
 			then
 			#success an alpha string
 			return 0
 		fi
 	;;
+	# 4 - 6 
+	lowercase) echo "$2" | tr '[:upper:]' '[:lower:]' 
+	return 0 ;;
+	uppercase) echo "$2" | tr '[:lower:]' '[:upper:]' 
+	return 0;;
+	trim) echo "$2" 
+	return 0;;
 	
-	*) # Catch all users typos 
+	
+	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtData : bmtDataFunc"
-		return 127
+		return 50
 	;;
+	
+	
 esac
-
 return 2
 }
 

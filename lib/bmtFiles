@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #=========================HEADER==========================================
-#FileName: bmtFiles 
-#Function: Contains file related utilities   
+#FileName: bmtFiles
+#Function: Contains file related utilities
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
@@ -11,14 +11,14 @@
 
 function bmtFilesFunc
 {
-	
-case "$1" in 
-	
-	isdirempty)
+
+case "$1" in
+
+	isdirempty) #1
 		if [ -d "$2" ]; then
 			# the directory exists
 			local checkVar=0
-			checkVar=$(find "$2" -mindepth 1 -print | wc -l) 
+			checkVar=$(find "$2" -mindepth 1 -print | wc -l)
 			if [  "$checkVar" == 0 ]; then
 				return 0 #not empty
 			else
@@ -28,23 +28,44 @@ case "$1" in
 			return 3
 		fi
 	;;
-	
-	makedir) 
+
+	makedir) #2
 		# make dir  makes a directory at path $2 with time/date stamp and enters it
 		# appends $3 to directory name
-		cd "$2" || return 255
+		cd "$2" || return 52
 		local dirVar=""
-		dirVar=$(date +%H%M-%d%b%y)"$3" 
+		dirVar=$(date +%H%M-%d%b%y)"$3"
 		mkdir -p "$dirVar"
-		cd "$dirVar" || return 255
+		cd "$dirVar" || return 52
 		printf '%s\n' "Directory made at:-"
 		pwd
 		return 0
 	;;
-	
-	*) # Catch all user typos 
+
+	directoryexists) #3
+	if [[ -d "$2" ]]; then
+		return 0
+	fi
+	return 2
+	;;
+
+	fileexists) #4
+	if [[ -f "$2" ]]; then
+		return 0
+	fi
+	return 2
+	;;
+
+	deviceexists) #5
+	if [[ -b "$2" ]]; then
+		return 0
+	fi
+	return 2
+	;;
+
+	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtFiles : bmtFilesFunc"
-		return 127
+		return 50
 	;;
 esac
 }

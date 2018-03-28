@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #=========================HEADER==========================================
-#FileName: bmtMisc 
-#Function: Contains miscellaneous utilities.  
+#FileName: bmtMisc
+#Function: Contains miscellaneous utilities.
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
@@ -13,25 +13,25 @@ function bmtMiscFunc
 {
 local   red=$(printf "\033[0;31m")
 local	normal=$(printf "\033[0m")
-case "$1" in 
+case "$1" in
 
-	spin) # animation
+	spin) # 1 animation
 		local spinner=( Ooooo oOooo ooOoo oooOo ooooO oooOo ooOoo oOooo);
 		while true; do
-			for i in "${spinner[@]}"; 
-			do 
-				# no new line , \r reset line       
+			for i in "${spinner[@]}";
+			do
+				# no new line , \r reset line
 				echo -ne "\r$i";
 				sleep 0.2;
 			done;
 		done
 	;;
-	
-	
-	checknet) # check if website up
-			#This uses netcat (nc) in its port scan mode, 
-			#a quick poke (-z is zero-I/O mode [used for 
-			#scanning]) with a quick timeout 
+
+
+	checknet) # 2 check if website up
+			#This uses netcat (nc) in its port scan mode,
+			#a quick poke (-z is zero-I/O mode [used for
+			#scanning]) with a quick timeout
 			#(-w 1 waits at most one second
 			#It checks passed website $1 on port 80 (HTTP).
 		if nc -zw1 "$2" 80; then
@@ -42,11 +42,41 @@ case "$1" in
 			return 2
 		fi
 	;;
+	# 3  Displays the current timestamp
+	now) echo "$(date +%s%N)" ;;
+
+	# 4 Displays the time elapsed between two times
+	elapsed)
+		local startVar="$2"
+		local stopVar="$3"
+		local diffVar="" 
+		#https://serverfault.com/questions/151109/how-do-i-get-current-unix-time-in-milliseconds-using-bash#151112
+		diffVar=$(echo "scale=6;($stopVar - ${startVar})/(1*10^09)" | bc)
+		echo "$diffVar"
+	;;
+	
+	# 5 Starts the timer
+	startWatch)
+		__BMT_START_WATCH=$(bmtMiscFunc now) 
+	;;
+	
+	# 6 Stops the timer
+	stopWatch)
+		if [ -n __BMT_START_WATCH ] 
+		then
+			local stopWatchVar=0
+			stopWatchVar=$(bmtMiscFunc now)
+			bmtMiscFunc elapsed "$__BMT_START_WATCH" "$stopWatchVar" 
+			return 0
+		else
+			return 2
+		fi
+	;;
 	
 	
-	*) # Catch all users typos 
+	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtMisc: bmtMiscFunc"
-		return 127
+		return 50
 	;;
 esac
 }

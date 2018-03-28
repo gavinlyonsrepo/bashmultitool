@@ -21,7 +21,7 @@ function Test_Func
 	bmtMiscFunc
 	bmtMiscFunc foo
 
-	# call spinner function put run in background and save PID
+	# 1 call spinner function put run in background and save PID
 	echo " "
 	bmtMiscFunc  spin &
 	pid=$!
@@ -30,12 +30,12 @@ function Test_Func
 	find ~ -name mint 2>/dev/null 'do stuff'
 	echo " "
 	echo "END"
-	# Stop spin function with PID
+	# 2 Stop spin function with PID
 	kill $pid 
 	sleep 2
 	echo " "
 
-	# checknet
+	# 3 checknet
 	echo " "
 	bmtMiscFunc checknet "www.fgndoignd.ie"
 	bmtMiscFunc checknet "www.bdbgbgbfg.ie"
@@ -43,6 +43,19 @@ function Test_Func
 	bmtMiscFunc checknet "www.boards.ie"
 	bmtMiscFunc checknet "www.google.ie"
 	echo " "
+	
+	#4 5 6 7
+	bmtMiscFunc startWatch
+	sleep .100
+	bmtMiscFunc stopWatch
+	
+	bmtMiscFunc startWatch
+	sleep 1
+	bmtMiscFunc stopWatch
+	
+	bmtMiscFunc startWatch
+	sleep 2.8
+	bmtMiscFunc stopWatch
 }
 
 #==================MAIN CODE=============================

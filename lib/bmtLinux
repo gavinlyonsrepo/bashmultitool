@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #=========================HEADER==========================================
-#FileName: bmtLinux 
-#Function: Contains linux related utilities 
+#FileName: bmtLinux
+#Function: Contains linux related utilities
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
@@ -12,49 +12,49 @@
 function bmtLinuxFunc
 {
 local   red=$(printf "\033[0;31m")
-local	normal=$(printf "\033[0m")
-local	pacVar=""
+local   normal=$(printf "\033[0m")
+local   pacVar=""
 
-case "$1" in 
+case "$1" in
 
 	checkpac) #7 check if package installed
 		case "$3" in
 			1)  # pacman based
 				pacVar=$(pacman -Qqs "$2")
 			;;
-			
+
 			2)  # debian based
 				pacVar=$(dpkg -l "$2" 2> /dev/null)
 			;;
-				
+
 			3) # rpm based
 				pacVar=$(rpm -qa | grep "$2" 2>/dev/null)
 			;;
-			
+
 			*) # unknown
 				printf '%s\n' "Unsupported Linux distro"
-				return 255
+				return 52
 			;;
 		esac
-		
+
 		if [ -n "$pacVar" ]
 		then #installed
 			#if text input is MES print good install message
-			if [ "$4" = "MES" ] 
-			then 
+			if [ "$4" = "MES" ]
+			then
 				printf '%s\n' "$2 is Installed"
 			fi
 			return 0
 		else #not installed
 			#if text input is MES print install bad message
-			if [ "$4" = "MES" ] 
+			if [ "$4" = "MES" ]
 			then
 				printf '%s\n' "${red}$2 is Not installed ${normal}"
 			fi
 			return 2
-		fi 
+		fi
 	;;
-	
+
 	distrocheck) #9 check what distro on
 			if [ -f /etc/redhat-release ]; then
 				# rpm based
@@ -65,24 +65,24 @@ case "$1" in
 			elif [ -f /etc/lsb-release ]; then
 				# deb based
 				return 4
-			elif [ -d /etc/pacman.d ]; then 
+			elif [ -d /etc/pacman.d ]; then
 				# pacman based
 				return 5
-			elif [ -f /etc/gentoo-release ]; then 
+			elif [ -f /etc/gentoo-release ]; then
 				# gentoo based
 				return 6
-			elif [ -f /etc/slackware-release ]; then 
+			elif [ -f /etc/slackware-release ]; then
 				# slackware based
 				return 7
 			else
 				printf '%s\n' "Unsupported Linux distro"
-				return 255
+				return 52
 			fi
 	;;
-	
+
 	isTextEdSet) #12 set text editor
 		if [ -z "${EDITOR}" ]
-		then 
+		then
 			export EDITOR="vi"
 			return 2
 		else
@@ -90,9 +90,34 @@ case "$1" in
 		fi
 	;;
 
-	*) # Catch all user typos 
+	log)
+		declare logdatfVar="%FT%T%z"
+		local logstrVar=""
+		local logmsgVar="$3"
+		local statusVar="$2"
+		declare logfileVar="$4.log"
+		local dateVar=$(date +"$logdatfVar")
+		
+		#error $statusvar
+		case "$statusVar" in
+		EMERGENCY|ALERT|CRITICAL|ERROR|WARNING|NOTICE|INFO|DEBUG|OK|FAILED|PASSED) : ;;
+		*) printf '%s\n' "Error bmtLinux : log : Invalid state : $statusVar"
+				return 55 ;;
+		esac
+		if [ -n logmsgVar ]
+		then
+			logstrVar="$dateVar - $statusVar - $logmsgVar"
+		else
+			logstrVar="$dateVar -- empty log message"
+		fi
+
+		echo "$logstrVar" >> "$5$logfileVar"
+		return 0
+	;;
+
+	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtLinux: bmtLinuxFunc"
-		return 127
+		return 50
 	;;
 esac
 }
