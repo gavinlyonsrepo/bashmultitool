@@ -49,9 +49,11 @@ sudo apt install bashmultitool
 
 Download latest fixed release and run the makefile as per 
 terminal commands below for version 1.2 latest release at time of writing
+Note: is you install with this methodyou will not be informed of updates 
+by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.1.tar.gz | tar xz
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.2.tar.gz | tar xz
 cd  bashmultitool-1.2
 sudo make install
 ```
