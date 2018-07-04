@@ -25,7 +25,7 @@ Table of contents
 Installation
 -----------------------------------------------
 
-**Linux debian based systems built on Ubuntu 16.04 LTS (Xenial Xerus)**
+**Linux debian based systems built on Ubuntu 18.04 LTS (Bionic Beaver)**
  
 A Personal Package Archives (PPA) has been created on Ubuntu
 package building and hosting section of launchpad site 
@@ -48,13 +48,13 @@ sudo apt install bashmultitool
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 1.2 latest release at time of writing
+terminal commands below for version 1.4 latest release at time of writing
 Note: is you install with this methodyou will not be informed of updates 
 by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.2.tar.gz | tar xz
-cd  bashmultitool-1.2
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.4.tar.gz | tar xz
+cd  bashmultitool-1.4
 sudo make install
 ```
 

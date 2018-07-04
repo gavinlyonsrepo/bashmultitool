@@ -14,3 +14,6 @@ Version control
 	* Added two new modes to printing options bringing total 
 	number of option to 56 (8 colours * 7 modes)
 	* Increased number of functions from 16 to 26 including stopwatch.
+
+### version 1.4-5 040718
+	* updating PPA to Ubuntu 18.04 LTS (Bionic Beaver)
