@@ -16,9 +16,9 @@ Table of contents
   * [Installation](#installation)
   * [Usage](#usage)
   * [Files](#files)
-  * [Dependencies](#dependencies)
   * [Features](#features)
   * [Communication](#communication)
+  * [Dependencies](#dependencies)
   * [History](#history)
   * [Copyright](#copyright)
 
@@ -73,81 +73,100 @@ done
 
 ```
 
-There are six files in library and are independent of each other
-you can source them individually if you wish, however prompt file IS 
+There are six files in library and they are independent of each other
+you can source them individually if you wish, however the prompt file *IS* 
 dependent on print.
 Each file has one function, To access functions from your shell scripts:
 
 [functionname] [keyword] [options]
 
+Six separate markdown help files with detailed information, 
+in documentation folder are available.
+For shortcut to each file click on link in 2nd table in **Files and setup** section below.
+The repo also contains a test folder where test files used in development are available.
 
 Files and setup
 -----------------------------------------
 
 | File Path | Description |
 | ------ | ------ |
-| /usr/lib/bashmultitool/bashmultitool/*  | 6 library files |
+| /usr/lib/bashmultitool/bashmultitool/*  | 6 library files see next table|
 | /usr/lib/bashmultitool/doc/README.md    | readme          |
 | /usr/lib/bashmultitool/doc/documentation/license.md | copyright |
 | /usr/lib/bashmultitool/doc/documentation/features.md | detailed information |
 | /usr/lib/bashmultitool/doc/documentation/changelog.md | history |  
 
-Dependencies
--------------------------------------
-GNU bash, version 4.3.48(1)-release 
 
-The check website section requires netcat installed. 
-
-[Netcat](https://en.wikipedia.org/wiki/Netcat)
+| Library file | Function | Sections | Content | Doc link |
+| ---- | ---- | ---- | ---- | ---- |
+|  bmtPrint | bmtPrintFunc | 101 | Printing text | [bmtPrint help file](documentation/bmtPrint.md)|
+|  bmtPrompt | bmtPromptFunc | 201-207 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
+|  bmtMisc  | bmtMiscFunc  | 301-303  | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
+|  bmtLinux | bmtLinuxFunc | 401-404 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
+|  bmtFiles | bmtFilesFunc | 501-505 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
+|  bmtData | btmDataFunc | 601-606 | Data related | [bmtData help file](documentation/bmtData.md)|
 
 
 Features
 ----------------------
-The library contains six files and six functions
+The library contains six files and six functions,
 which contains 26 sections in total.
+The sections are grouped in six files as per logical function.
+Printing, prompting, Linux related, file related, 
+data related and miscellaneous.
 
-1) Coloured printed text, eight colours, seven modes.
+
+## Section numbered list
+
+101) Coloured printed text, 8 colours, 7 modes. 56 options in total.
 
 Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 
-Modes: normal, bold, underline, background, hiy, bold hiy, background hiy 
-Where hiy = high intensity  
+Modes: normal, bold, underline, background, hiy, bold hiy, background hiy. 
 
-for example:
+Note: hiy = high intensity.
 
+Example Output:
 
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
  
  
-2) Horizontal lines across terminal in any colour
-3) yes-no-quit [y/n/q] prompt
-4) YES-no [Y/n] prompt
-5) yes-NO [y/N] prompt
-6) Anykey to continue prompt in any colour
-7) QUIT-no [Q/n] prompt
-8) quit-NO [q/N] prompt
-9) Check if a website is up
-10) Spinner Animation for long non-verbose commands
-11) Stopwatch / timer
-12) Check package installed
-13) Linux distro family checker
-14) Set text editor $EDITOR if not set
-15) log file handler
-16) Make and enter a formated directory
-17) check if directory exists and empty
-18) directory exists
-19) file exists
-20) device exists
-21) integer user input check
-22) alphabet user input check
-23) alphanumeric user input check
-24) convert string to lowercase
-25) convert string to uppercase
-26) trim whitespace from string
+201) Horizontal lines across terminal in any colour
+202) yes-no-quit [y/n/q] prompt
+203) YES-no [Y/n] prompt
+204) yes-NO [y/N] prompt
+205) Anykey to continue prompt in any colour
+206) QUIT-no [Q/n] prompt
+207) quit-NO [q/N] prompt
 
-For full details see 
-Features.md in documentation section 
-[Features file](documentation/Features.md)
+301) Check if a website is up
+302) Spinner Animation for long non-verbose commands
+303) Stopwatch / timer
+
+401) Check package installed
+402) Linux distro family checker
+403) Set text editor $EDITOR if not set
+404) log file handler
+
+501) Make and enter a formated directory
+502) check if directory exists and empty
+503) directory exists
+504) file exists
+505) device exists
+
+601) integer user input check
+602) alphabet user input check
+603) alphanumeric user input check
+604) convert string to lowercase
+605) convert string to uppercase
+606) trim whitespace from string
+
+
+Dependencies
+-------------------------------------
+1. GNU bash, version 4.3.48(1)-release 
+
+2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
 
 
 Communication
