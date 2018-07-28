@@ -49,7 +49,7 @@ sudo apt install bashmultitool
 
 Download latest fixed release and run the makefile as per 
 terminal commands below for version 1.4 latest release at time of writing
-Note: is you install with this methodyou will not be informed of updates 
+Note: If you install with this method you will not be informed of updates 
 by system.
 
 ```sh
@@ -74,15 +74,16 @@ done
 ```
 
 There are six files in library and they are independent of each other
-you can source them individually if you wish, however the prompt file *IS* 
+you can source them individually if you wish, however the prompt file *is* 
 dependent on print.
+
 Each file has one function, To access functions from your shell scripts:
 
 [functionname] [keyword] [options]
 
 Six separate markdown help files with detailed information, 
 in documentation folder are available.
-For shortcut to each file click on link in 2nd table in **Files and setup** section below.
+For shortcut to each file click on link in 2nd table in *Files and setup* section below.
 The repo also contains a test folder where test files used in development are available.
 
 Files and setup
@@ -118,7 +119,7 @@ data related and miscellaneous.
 
 ## Section numbered list
 
-101) Coloured printed text, 8 colours, 7 modes. 56 options in total.
+101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
 
 Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 
@@ -131,35 +132,35 @@ Example Output:
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
  
  
-201) Horizontal lines across terminal in any colour
-202) yes-no-quit [y/n/q] prompt
-203) YES-no [Y/n] prompt
-204) yes-NO [y/N] prompt
-205) Anykey to continue prompt in any colour
-206) QUIT-no [Q/n] prompt
-207) quit-NO [q/N] prompt
+201 Horizontal lines across terminal in any colour
+202 yes-no-quit [y/n/q] prompt
+203 YES-no [Y/n] prompt
+204 yes-NO [y/N] prompt
+205 Anykey to continue prompt in any colour
+206 QUIT-no [Q/n] prompt
+207 quit-NO [q/N] prompt
 
-301) Check if a website is up
-302) Spinner Animation for long non-verbose commands
-303) Stopwatch / timer
+301 Check if a website is up
+302 Spinner Animation for long non-verbose commands
+303 Stopwatch / timer
 
-401) Check package installed
-402) Linux distro family checker
-403) Set text editor $EDITOR if not set
-404) log file handler
+401 Check package installed
+402 Linux distro family checker
+403 Set text editor $EDITOR if not set
+404 log file handler
 
-501) Make and enter a formated directory
-502) check if directory exists and empty
-503) directory exists
-504) file exists
-505) device exists
+501 Make and enter a formated directory
+502 check if directory exists and empty
+503 directory exists
+504 file exists
+505 device exists
 
-601) integer user input check
-602) alphabet user input check
-603) alphanumeric user input check
-604) convert string to lowercase
-605) convert string to uppercase
-606) trim whitespace from string
+601 integer user input check
+602 alphabet user input check
+603 alphanumeric user input check
+604 convert string to lowercase
+605 convert string to uppercase
+606 trim whitespace from string
 
 
 Dependencies
