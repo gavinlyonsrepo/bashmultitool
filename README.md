@@ -53,8 +53,8 @@ Note: If you install with this method you will not be informed of updates
 by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.4.tar.gz | tar xz
-cd  bashmultitool-1.4
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.5.tar.gz | tar xz
+cd  bashmultitool-1.5
 sudo make install
 ```
 
