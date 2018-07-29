@@ -86,15 +86,17 @@ in documentation folder are available.
 For shortcut to each file click on link in 2nd table in *Files and setup* section below.
 The repo also contains a test folder where test files used in development are available.
 
+A script to print library meta data for test and debug is also installed.
+
 Files and setup
 -----------------------------------------
 
 | File Path | Description |
 | ------ | ------ |
+| /usr/bin/bashmultitool.sh | Script to print library meta data |
 | /usr/lib/bashmultitool/bashmultitool/*  | 6 library files see next table|
-| /usr/lib/bashmultitool/doc/README.md    | readme          |
+| /usr/lib/bashmultitool/doc/README.md    | help      |
 | /usr/lib/bashmultitool/doc/documentation/license.md | copyright |
-| /usr/lib/bashmultitool/doc/documentation/features.md | detailed information |
 | /usr/lib/bashmultitool/doc/documentation/changelog.md | history |  
 
 
@@ -102,7 +104,7 @@ Files and setup
 | ---- | ---- | ---- | ---- | ---- |
 |  bmtPrint | bmtPrintFunc | 101 | Printing text | [bmtPrint help file](documentation/bmtPrint.md)|
 |  bmtPrompt | bmtPromptFunc | 201-207 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
-|  bmtMisc  | bmtMiscFunc  | 301-303  | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
+|  bmtMisc  | bmtMiscFunc  | 301-304  | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
 |  bmtLinux | bmtLinuxFunc | 401-404 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
 |  bmtFiles | bmtFilesFunc | 501-505 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
 |  bmtData | btmDataFunc | 601-606 | Data related | [bmtData help file](documentation/bmtData.md)|
@@ -111,7 +113,7 @@ Files and setup
 Features
 ----------------------
 The library contains six files and six functions,
-which contains 26 sections in total.
+which contains 27 sections in total.
 The sections are grouped in six files as per logical function.
 Printing, prompting, Linux related, file related, 
 data related and miscellaneous.
@@ -119,7 +121,7 @@ data related and miscellaneous.
 
 ## Section numbered list
 
-101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
+* 101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
 
 Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 
@@ -132,40 +134,41 @@ Example Output:
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
  
  
-201 Horizontal lines across terminal in any colour
-202 yes-no-quit [y/n/q] prompt
-203 YES-no [Y/n] prompt
-204 yes-NO [y/N] prompt
-205 Anykey to continue prompt in any colour
-206 QUIT-no [Q/n] prompt
-207 quit-NO [q/N] prompt
+* 201 Horizontal lines across terminal in any colour
+* 202 yes-no-quit [y/n/q] prompt
+* 203 YES-no [Y/n] prompt
+* 204 yes-NO [y/N] prompt
+* 205 Anykey to continue prompt in any colour
+* 206 QUIT-no [Q/n] prompt
+* 207 quit-NO [q/N] prompt
 
-301 Check if a website is up
-302 Spinner Animation for long non-verbose commands
-303 Stopwatch / timer
+* 301 Check if a website is up
+* 302 Spinner Animation for long non-verbose commands
+* 303 Stopwatch / timer
+* 304 Weather forecast
 
-401 Check package installed
-402 Linux distro family checker
-403 Set text editor $EDITOR if not set
-404 log file handler
+* 401 Check package installed
+* 402 Linux distro family checker
+* 403 Set text editor $EDITOR if not set
+* 404 log file handler
 
-501 Make and enter a formated directory
-502 check if directory exists and empty
-503 directory exists
-504 file exists
-505 device exists
+* 501 Make and enter a formated directory
+* 502 check if directory exists and empty
+* 503 directory exists
+* 504 file exists
+* 505 device exists
 
-601 integer user input check
-602 alphabet user input check
-603 alphanumeric user input check
-604 convert string to lowercase
-605 convert string to uppercase
-606 trim whitespace from string
+* 601 integer user input check
+* 602 alphabet user input check
+* 603 alphanumeric user input check
+* 604 convert string to lowercase
+* 605 convert string to uppercase
+* 606 trim whitespace from string
 
 
 Dependencies
 -------------------------------------
-1. GNU bash, version 4.3.48(1)-release 
+1. GNU bash, version 4.4.18-2  
 
 2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
 

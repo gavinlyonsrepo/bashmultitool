@@ -73,6 +73,15 @@ case "$1" in
 		fi
 	;;
 	
+	# 7
+	weather)
+		echo "3 day weather forecast by WTTR.IN"
+		echo "Type a City name, airport code, domain name or area code:-"
+		local mycityVar=""
+		read -r mycityVar		
+		clear
+		curl wttr.in/"$mycityVar"
+	;;
 	
 	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtMisc: bmtMiscFunc"

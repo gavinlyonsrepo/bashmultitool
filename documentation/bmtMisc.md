@@ -41,3 +41,10 @@ sleep 2.8
 bmtMiscFunc stopWatch
 # returns  ~ 2.813207
 ```
+304) weather
+
+3 day weather forecast by wttr.in
+
+```sh
+bmtMiscFunc weather
+```

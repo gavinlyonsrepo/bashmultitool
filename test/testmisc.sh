@@ -44,7 +44,7 @@ function Test_Func
 	bmtMiscFunc checknet "www.google.ie"
 	echo " "
 	
-	#4 5 6 7
+	#4 5 6 
 	bmtMiscFunc startWatch
 	sleep .100
 	bmtMiscFunc stopWatch
@@ -56,6 +56,9 @@ function Test_Func
 	bmtMiscFunc startWatch
 	sleep 2.8
 	bmtMiscFunc stopWatch
+	
+	# 7
+	bmtMiscFunc weather
 }
 
 #==================MAIN CODE=============================

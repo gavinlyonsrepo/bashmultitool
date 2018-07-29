@@ -17,3 +17,7 @@ Version control
 
 ### version 1.4-5 040718
 	* updating PPA to Ubuntu 18.04 LTS (Bionic Beaver)
+
+### version 1.5-6 290718
+	* Add script with meta data and help.
+	* re-org of Documentation. 
