@@ -48,7 +48,7 @@ sudo apt install bashmultitool
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 1.4 latest release at time of writing
+terminal commands below for version 1.5 latest release at time of writing
 Note: If you install with this method you will not be informed of updates 
 by system.
 
@@ -77,9 +77,13 @@ There are six files in library and they are independent of each other
 you can source them individually if you wish, however the prompt file *is* 
 dependent on print.
 
-Each file has one function, To access functions from your shell scripts:
+Each file has one function, To access functions from your shell scripts type:
 
+
+
+```sh
 [functionname] [keyword] [options]
+```
 
 Six separate markdown help files with detailed information, 
 in documentation folder are available.
