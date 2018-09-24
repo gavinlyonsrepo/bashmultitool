@@ -24,7 +24,7 @@ Returns 0 for installed , 2 for not installed ,
 bmtLinuxFunc distrocheck
 ```
 
-Returns 2-7 for unknown distro family groups or 52 for unknown.
+Returns 2-7 for known distro family groups or 52 for unknown.
 (2 redhat based, 3 fedora based, 4 debian based, 5 pacman based,
 6 gentoo based , 7 slackware based.)
 
