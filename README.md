@@ -39,12 +39,6 @@ sudo apt update
 sudo apt install bashmultitool
 ```
 
-**Linux Arch pacman based systems AUR**
-
-* AUR package name : bashmultitool
-* AUR maintainer : glyons
-* AUR location: https://aur.archlinux.org/packages/bashmultitool/
-
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
