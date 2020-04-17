@@ -7,6 +7,11 @@ Overview
 can be imported into shell scripts to create functional and colorful 
 scripts and Terminal users interfaces(TUI).
 * Author: Gavin Lyons
+* Contact: Upstream repo at github site below or glyons66@hotmail.com
+* Upstream repository: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
+* History: See changelog.md in documentation section for version control history 
+* Copyright: Copyright (C) 2018 Gavin Lyons MIT expat See LICENSE.md in documentation section 
+
 
 Table of contents
 ---------------------------
@@ -17,10 +22,8 @@ Table of contents
   * [Usage](#usage)
   * [Files](#files)
   * [Features](#features)
-  * [Communication](#communication)
   * [Dependencies](#dependencies)
-  * [History](#history)
-  * [Copyright](#copyright)
+
 
 Installation
 -----------------------------------------------
@@ -51,7 +54,9 @@ curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.5.tar.gz | ta
 cd  bashmultitool-1.5
 sudo make install
 ```
+**Arch based System** 
 
+It's also available in the Arch Linux user repo AUR
 
 Usage
 -------------------------------------------
@@ -169,23 +174,3 @@ Dependencies
 1. GNU bash, version 4.4.18-2  
 
 2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
-
-
-Communication
------------
-If you should find a bug or you have any other query, 
-please send a report.
-Pull requests, suggestions for improvements
-and new features welcome.
-* Contact: Upstream repo at github site below or glyons66@hotmail.com
-* Upstream repository: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
-
-History
-------------------
-* See changelog.md in documentation section for version control history
- 
-Copyright
----------
-Copyright (C) 2018 Gavin Lyons MIT expat
-See LICENSE.md in documentation section 
-for more details
