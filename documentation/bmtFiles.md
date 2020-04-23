@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtFiles | bmtFilesFunc | 501-505 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
+|  bmtFiles | bmtFilesFunc | 501-505 | File related | bmtFiles.md |
 
 501) Make formated directory
 

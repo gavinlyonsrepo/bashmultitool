@@ -7,20 +7,19 @@ Overview
 can be imported into shell scripts to create functional and colorful 
 scripts and Terminal users interfaces(TUI).
 * Author: Gavin Lyons
+* Communication: Upstream repo at github site below or glyons66@hotmail.com
+* URL: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
+* History:  See changelog.md in documentation section for version control history.
+* Copyright: Copyright (C) 2018 Gavin Lyons. See LICENSE.md in documentation section.
 
 Table of contents
 ---------------------------
 
-  * [Overview](#overview)
-  * [Table of contents](#table-of-contents)
   * [Installation](#installation)
   * [Usage](#usage)
   * [Files](#files)
   * [Features](#features)
-  * [Communication](#communication)
   * [Dependencies](#dependencies)
-  * [History](#history)
-  * [Copyright](#copyright)
 
 Installation
 -----------------------------------------------
@@ -52,7 +51,6 @@ cd  bashmultitool-1.5
 sudo make install
 ```
 
-
 Usage
 -------------------------------------------
 Source the library from your bash shell scripts like so:
@@ -64,7 +62,6 @@ do
 	source "$MYFILE"
 done
 
-
 ```
 
 There are six files in library and they are independent of each other
@@ -72,8 +69,6 @@ you can source them individually if you wish, however the prompt file *is*
 dependent on print.
 
 Each file has one function, To access functions from your shell scripts type:
-
-
 
 ```sh
 [functionname] [keyword] [options]
@@ -165,27 +160,7 @@ Example Output:
 
 
 Dependencies
--------------------------------------
-1. GNU bash, version 4.4.18-2  
+------------------------------------
+1. GNU bash, version 4.4.20  
 
 2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
-
-
-Communication
------------
-If you should find a bug or you have any other query, 
-please send a report.
-Pull requests, suggestions for improvements
-and new features welcome.
-* Contact: Upstream repo at github site below or glyons66@hotmail.com
-* Upstream repository: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
-
-History
-------------------
-* See changelog.md in documentation section for version control history
- 
-Copyright
----------
-Copyright (C) 2018 Gavin Lyons MIT expat
-See LICENSE.md in documentation section 
-for more details

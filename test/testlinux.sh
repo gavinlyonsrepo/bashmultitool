@@ -7,7 +7,7 @@
 
 #====================FUNCTIONS===============================
 #Source the lib
-LIBPATH="/home/gavin/Documents/Tech/Linux/Scripts/BashMultiTool/lib/"
+LIBPATH="/home/gavin/Documents/Tech/Scripts/BashMultiTool/lib/"
 for MYFILE in "$LIBPATH"*;
 do
 	source "$MYFILE"

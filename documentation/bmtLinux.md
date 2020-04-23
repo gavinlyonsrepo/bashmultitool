@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtLinux | bmtLinuxFunc | 401-404 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
+|  bmtLinux | bmtLinuxFunc | 401-404 | Linux related | bmtLinux.md |
 
 
 401) Check package installed

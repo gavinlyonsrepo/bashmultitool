@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtPrint | bmtPrintFunc | 101 | Printing text | [bmtPrint help file](documentation/bmtPrint.md)|
+|  bmtPrint | bmtPrintFunc | 101 | Printing text | bmtPrint.md |
 
 101) Colored printed text  
 

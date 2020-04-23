@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtPrompt | bmtPromptFunc | 201-207 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
+|  bmtPrompt | bmtPromptFunc | 201-207 | Prompts | bmtPrompt.md|
 
 
 201) Horizontal lines across terminal of single character
@@ -19,7 +19,7 @@ Keyword is yesnoquit , returns codes based on user input
 
 ```sh
 echo  "Do you want to foo? [y/n/q] :"
-bmtPromptFunc yesno
+bmtPromptFunc yesnoquit
 ```
 Returns 0 for yes , 2 for no , 3 for quit
 

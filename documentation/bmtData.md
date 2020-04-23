@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtData | btmDataFunc | 601-606 | Data related | [bmtData help file](documentation/bmtData.md)|
+|  bmtData | btmDataFunc | 601-606 | Data related | bmtData.md|
 
 601) integer input check
 

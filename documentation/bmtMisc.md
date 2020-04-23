@@ -1,6 +1,6 @@
-| Library file | Function | Sections | Content | Doc link |
+| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtMisc  | bmtMiscFunc  | 301-303  | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
+|  bmtMisc  | bmtMiscFunc  | 301-303  | Miscellaneous | bmtMisc.md |
 
 301) Check website up
 
