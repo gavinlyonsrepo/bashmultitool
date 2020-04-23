@@ -15,8 +15,6 @@ scripts and Terminal users interfaces(TUI).
 Table of contents
 ---------------------------
 
-  * [Overview](#overview)
-  * [Table of contents](#table-of-contents)
   * [Installation](#installation)
   * [Usage](#usage)
   * [Files](#files)
@@ -176,21 +174,3 @@ Dependencies
 2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
 
 
-Communication
------------
-If you should find a bug or you have any other query, 
-please send a report.
-Pull requests, suggestions for improvements
-and new features welcome.
-* Contact: Upstream repo at github site below or glyons66@hotmail.com
-* Upstream repository: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
-
-History
-------------------
-* See changelog.md in documentation section for version control history
- 
-Copyright
----------
-Copyright (C) 2018 Gavin Lyons MIT expat
-See LICENSE.md in documentation section 
-for more details
