@@ -26,7 +26,7 @@ Table of contents
 Installation
 -----------------------------------------------
 
-**Linux debian based systems built on Ubuntu 18.04 LTS (Bionic Beaver)**
+**Linux debian based systems built on Ubuntu 20.04 LTS (Focal Fossa)**
  
 A Personal Package Archives (PPA) has been created on Ubuntu
 package building and hosting section of launchpad site 
