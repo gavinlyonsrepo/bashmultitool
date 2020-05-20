@@ -30,7 +30,7 @@ function Bmt_Metadata_Func
 	bmtPrintFunc  norm " Description : A Bash Shell library file for commonly used functions 
  can be imported into shell scripts to create functional and colorful 
  scripts and Terminal users interfaces(TUI). "
-	bmtPrintFunc  norm " Version : 1.5-6 "
+	bmtPrintFunc  norm " Version : 1.7-8"
 	bmtPrintFunc  norm " License: MIT"
 	bmtPrintFunc  norm " URL : https://github.com/gavinlyonsrepo/bashmultitool "
 	bmtPrintFunc  norm " Path : /usr/lib/bashmultitool"

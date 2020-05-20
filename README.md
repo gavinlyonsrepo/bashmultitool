@@ -43,13 +43,13 @@ sudo apt install bashmultitool
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 1.5 latest release at time of writing
+terminal commands below for version 1.7 latest release at time of writing
 Note: If you install with this method you will not be informed of updates 
 by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.5.tar.gz | tar xz
-cd  bashmultitool-1.5
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.7.tar.gz | tar xz
+cd  bashmultitool-1.7
 sudo make install
 ```
 **Arch based System** 

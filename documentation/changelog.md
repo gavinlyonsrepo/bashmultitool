@@ -21,3 +21,6 @@ Version control
 ### version 1.5-6 290718
 	* Add script with meta data and help.
 	* re-org of Documentation. 
+
+### version 1.7-8 04202020
+	* updating PPA to Ubuntu 20.04 LTS (Focal Fossa)
