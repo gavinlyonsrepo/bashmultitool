@@ -44,6 +44,6 @@ second option is message, third option is file name .log is appended i.e mylog b
 Fourth option is path to file.
 
 ```sh
-	bmtLinuxFunx log "CRITICAL" "1201 alarm Executive overflow - no vacant areas" mylog /tmp/
-	bmtLinuxFunx log "CRITICAL" "1202 alarm Executive overflow - no core sets" mylog /tmp/
+	bmtLinuxFunc log "CRITICAL" "1201 alarm Executive overflow - no vacant areas" mylog /tmp/
+	bmtLinuxFunc log "CRITICAL" "1202 alarm Executive overflow - no core sets" mylog /tmp/
 ```

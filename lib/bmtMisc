@@ -43,7 +43,7 @@ case "$1" in
 		fi
 	;;
 	# 3  Displays the current timestamp
-	now) echo "$(date +%s%N)" ;;
+	now) date +%s%N ;;
 
 	# 4 Displays the time elapsed between two times
 	elapsed)
@@ -62,7 +62,7 @@ case "$1" in
 	
 	# 6 Stops the timer
 	stopWatch)
-		if [ -n __BMT_START_WATCH ] 
+		if [ -n "$__BMT_START_WATCH" ] 
 		then
 			local stopWatchVar=0
 			stopWatchVar=$(bmtMiscFunc now)

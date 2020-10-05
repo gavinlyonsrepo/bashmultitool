@@ -104,7 +104,7 @@ case "$1" in
 		*) printf '%s\n' "Error bmtLinux : log : Invalid state : $statusVar"
 				return 55 ;;
 		esac
-		if [ -n logmsgVar ]
+		if [ -n "$logmsgVar" ]
 		then
 			logstrVar="$dateVar - $statusVar - $logmsgVar"
 		else
