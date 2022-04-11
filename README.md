@@ -1,27 +1,19 @@
-
 Overview
 --------------------------------------------
-* Name: bashmultitool
-* Title : Bash Shell library  for commonly used functions.
+* Name: bashMultiTool
 * Description: A Bash Shell library file for commonly used functions
 can be imported into shell scripts to create functional and colorful 
 scripts and Terminal users interfaces(TUI).
 * Author: Gavin Lyons
-* Communication: Upstream repo at github site below or glyons66@hotmail.com
-* URL: [bashmultitool](https://github.com/gavinlyonsrepo/bashmultitool)
-* History:  See changelog.md in documentation section for version control history.
-* Copyright: Copyright (C) 2018 Gavin Lyons. See LICENSE.md in documentation section.
 
 Table of contents
 ---------------------------
 
   * [Installation](#installation)
+  * [Dependencies](#dependencies)
   * [Usage](#usage)
   * [Files](#files)
-  * [Features](#features)
-  * [Communication](#communication)
-  * [Dependencies](#dependencies)
-
+  * [Software](#software)
 
 Installation
 -----------------------------------------------
@@ -55,6 +47,12 @@ sudo make install
 **Arch based System** 
 
 It's also available in the Arch Linux user repo AUR
+
+Dependencies
+-------------------------------------
+1. GNU bash, version 4.4.18-2  
+
+2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
 
 Usage
 -------------------------------------------
@@ -111,7 +109,7 @@ Files and setup
 |  bmtData | btmDataFunc | 601-606 | Data related | [bmtData help file](documentation/bmtData.md)|
 
 
-Features
+Software
 ----------------------
 The library contains six files and six functions,
 which contains 27 sections in total.
@@ -126,14 +124,12 @@ data related and miscellaneous.
 
 Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 
-Modes: normal, bold, underline, background, hiy, bold hiy, background hiy. 
-
-Note: hiy = high intensity.
-
+Modes: normal, bold, underline, background, high intensity,
+bold high intensity, background high intensity.  
+ 
 Example Output:
 
-![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/screenshot/colour_print_example.png)
- 
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/colour_print_example.png)
  
 * 201 Horizontal lines across terminal in any colour
 * 202 yes-no-quit [y/n/q] prompt
@@ -165,12 +161,3 @@ Example Output:
 * 604 convert string to lowercase
 * 605 convert string to uppercase
 * 606 trim whitespace from string
-
-
-Dependencies
--------------------------------------
-1. GNU bash, version 4.4.18-2  
-
-2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
-
-
