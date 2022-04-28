@@ -34,7 +34,7 @@ echo "$?"
 
 1. Param1 color of box , tput setaf , 1 = red
 2. Param2 color of text  , tput setaf , 2 = green
-3. Rest of Params the lines of text
+3. The Rest of Params are the lines of text
 
 ```sh
 bmtMiscFunc drawbox 1 2 'first line' 'second line' 'third line'
@@ -43,8 +43,8 @@ bmtMiscFunc drawbox 1 2 'first line' 'second line' 'third line'
 804) Create a single line box with variable box character. 
 1. Param 1 color of box,  tput setaf 2=green
 2. Param 2 color of text ,  tput setaf 6=cyan
-2. Param2 symbol top make box out of.
-3. Param3 text
+3. Param 3 symbol to make the box lines out of.
+4. Param 4 text
 
 ```sh
 bmtMiscFunc title 2 6 '#' 'hello'
