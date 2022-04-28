@@ -1,23 +1,24 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+# === HEADER ===
 #FileName: bmtLinux
 #Function: Contains linux related utilities
 #library name: bashmultitool
-#Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 
 function bmtLinuxFunc
 {
-local   red=$(printf "\033[0;31m")
-local   normal=$(printf "\033[0m")
+local   red
+red=$(printf "\033[0;31m")
+local   normal
+normal=$(printf "\033[0m")
 local   pacVar=""
 
 case "$1" in
 
-	checkpac) #7 check if package installed
+	checkpac) # 401 check if package installed
 		case "$3" in
 			1)  # pacman based
 				pacVar=$(pacman -Qqs "$2")
@@ -47,7 +48,7 @@ case "$1" in
 			return 0
 		else #not installed
 			#if text input is MES print install bad message
-			if [ "$4" = "MES" ]
+			if [ "$4" = "MES" ];
 			then
 				printf '%s\n' "${red}$2 is Not installed ${normal}"
 			fi
@@ -55,7 +56,7 @@ case "$1" in
 		fi
 	;;
 
-	distrocheck) #9 check what distro on
+	distrocheck) #402 check what distro on
 			if [ -f /etc/redhat-release ]; then
 				# rpm based
 				return 2
@@ -75,12 +76,12 @@ case "$1" in
 				# slackware based
 				return 7
 			else
-				printf '%s\n' "Unsupported Linux distro"
+				printf '%s\n' "UnKnown Linux distro"
 				return 52
 			fi
 	;;
 
-	isTextEdSet) #12 set text editor
+	isTextEdSet) #403 set text editor
 		if [ -z "${EDITOR}" ]
 		then
 			export EDITOR="vi"
@@ -90,34 +91,79 @@ case "$1" in
 		fi
 	;;
 
-	log)
+	log) #404
 		declare logdatfVar="%FT%T%z"
 		local logstrVar=""
-		local logmsgVar="$3"
 		local statusVar="$2"
-		declare logfileVar="$4.log"
-		local dateVar=$(date +"$logdatfVar")
+		local logmsgVar="$3"
+		logfileVar="$4.log"
+		local dateVar
+		dateVar=$(date +"$logdatfVar")
 		
-		#error $statusvar
+		# Check that $statusvar is valid
 		case "$statusVar" in
 		EMERGENCY|ALERT|CRITICAL|ERROR|WARNING|NOTICE|INFO|DEBUG|OK|FAILED|PASSED) : ;;
 		*) printf '%s\n' "Error bmtLinux : log : Invalid state : $statusVar"
 				return 55 ;;
 		esac
+		
+		# Create the log message
 		if [ -n "$logmsgVar" ]
 		then
 			logstrVar="$dateVar - $statusVar - $logmsgVar"
 		else
 			logstrVar="$dateVar -- empty log message"
 		fi
-
+		
+		mkdir -p "$5"
 		echo "$logstrVar" >> "$5$logfileVar"
+		
+		# If param 6 added echo as well as log
+		[ "$6" = "MES" ] && echo "$logstrVar" 
 		return 0
 	;;
-
+	
+	user) #405 	
+	[ -z "$2" ] && return 1
+	if id -u "$2" >/dev/null 2>&1; then
+		return 0
+	else
+		return 2
+	fi
+	;;
+	
+	isvarempty) #406
+		local var_name="$2"
+		local var_value="${!var_name}"
+		if [[ -v "$var_name" ]]; then
+		   if [[ -n "$var_value" ]]; then
+			 return 0 # "set and non-empty"
+		   else
+			 return 2 # "set and empty"
+		   fi
+		else
+			return 3 # "unset"
+		fi
+	;;
+	
+	runasroot) #407
+	if [[ ${EUID} -ne 0 ]]; then
+		printf '%s\n' "${red} Error :: This script must run as root, program exiting! ${normal}"
+		return 2
+	else
+		echo "Info :: Running as root"
+		return 0
+	fi
+	;;
+	
+	iscommand) #408 
+		hash "$2" 2>/dev/null || return 2
+		return 0
+	;;
+	
 	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtLinux: bmtLinuxFunc"
-		return 50
+		return 255
 	;;
 esac
 }

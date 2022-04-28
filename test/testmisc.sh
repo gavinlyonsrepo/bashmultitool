@@ -1,11 +1,12 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+#shellcheck disable=SC1090 # source "$MYFILE"
+
+#=== HEADER ===
 #name: testMisc.sh
 #Description: test file for bashmultitool bmtMisc
-#Written : Gavin Lyons
 
-#====================FUNCTIONS===============================
+#=== FUNCTIONS === 
 #Source the lib
 LIBPATH="/home/gavin/Documents/Tech/Scripts/BashMultiTool/lib/"
 for MYFILE in "$LIBPATH"*;
@@ -17,50 +18,51 @@ done
 function Test_Func
 {
 	# error handling check(catch typos)
-	echo "error handling"
+	echo "Error handling"
 	bmtMiscFunc
 	bmtMiscFunc foo
+	echo "$?"
 
-	# 1 call spinner function put run in background and save PID
-	echo " "
-	bmtMiscFunc  spin &
-	pid=$!
-	disown
-	echo "START"
-	find ~ -name mint 2>/dev/null 'do stuff'
-	echo " "
-	echo "END"
-	# 2 Stop spin function with PID
-	kill $pid 
-	sleep 2
-	echo " "
-
-	# 3 checknet
-	echo " "
-	bmtMiscFunc checknet "www.fgndoignd.ie"
-	bmtMiscFunc checknet "www.bdbgbgbfg.ie"
-	echo " "
-	bmtMiscFunc checknet "www.boards.ie"
-	bmtMiscFunc checknet "www.google.ie"
-	echo " "
+	# 801 password generator 
+	echo " " 
+	echo "801 test"
+	bmtMiscFunc password "/home/gavin/Documents/Tech/Scripts/BashMultiTool/stuff/"
+	echo "$?"
+	echo " " 
 	
-	#4 5 6 
-	bmtMiscFunc startWatch
-	sleep .100
-	bmtMiscFunc stopWatch
+	bmtMiscFunc password 
+	echo "$?"
+	echo " " 
 	
-	bmtMiscFunc startWatch
-	sleep 1
-	bmtMiscFunc stopWatch
+	#802 battery level 
+	echo "802 test"
+	bmtMiscFunc getbatlevel "BAT0" "MES"
+	echo "$?"
+	echo " " 
 	
-	bmtMiscFunc startWatch
-	sleep 2.8
-	bmtMiscFunc stopWatch
+	bmtMiscFunc getbatlevel "foo" "MES"
+	echo "$?"
+	echo " " 
 	
-	# 7
-	bmtMiscFunc weather
+	#803 
+	echo "803 test box"
+	# 1 = red,box 2 = green,text "tput setaf  colours"
+	bmtMiscFunc drawbox 1 2 'first line' 'second line' 'third line'
+	echo " " 
+	# 7 = white,box  6= cyan,text "tput setaf  colours"
+	bmtMiscFunc drawbox 7 6 'hello world' 
+	echo " " 
+	
+	#804 
+	echo "804 test title"
+	# 7 = white,box  6= cyan,text "tput setaf  colours"
+	bmtMiscFunc title 7 6   '#' 'hello'
+	echo " " 
+	# 2 = green,box  6= cyan,text "tput setaf  colours"
+	bmtMiscFunc title 2 6   '+' 'World bye'
+	echo "end of tests"
 }
 
-#==================MAIN CODE=============================
 Test_Func
-#====================== END ==============================
+
+# === END ===

@@ -24,3 +24,7 @@ Version control
 
 ### version 1.7-8 04202020
 	* updating PPA to Ubuntu 20.04 LTS (Focal Fossa)
+
+### Version 2.0-1 28-04-2022
+		* updating PPA to Ubuntu 22.04 LTS (Jammy Jellyfish)
+		* Added 23 new sub-sections.

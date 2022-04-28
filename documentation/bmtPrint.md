@@ -2,6 +2,18 @@
 | ---- | ---- | ---- | ---- | ---- |
 |  bmtPrint | bmtPrintFunc | 101 | Printing text | bmtPrint.md |
 
+**Section One  , Printing**
+
+* 101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
+
+Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
+
+Modes: normal, bold, underline, background, high intensity,
+bold high intensity, background high intensity.  
+
+
+**Sub-Sections**
+
 101) Colored printed text  
 
 The keyword represent the color, the text to be printed is first option.
@@ -9,6 +21,7 @@ leave text option blank to just change the colour mode of cursor
 
 ```sh
 bmtPrintFunc red    # change colour, no output.
+echo "red text"
 bmtPrintFunc norm "default terminal text"
 
 bmtPrintFunc black "black"
@@ -68,3 +81,9 @@ bmtPrintFunc hbg_purple "high intensity background purple  "
 bmtPrintFunc hbg_cyan "high intensity background cyan  "
 bmtPrintFunc hbg_white "high intensity background white  " 
 ```
+
+**Example Output:**
+
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/colour_print_example.png)
+
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/output_test_print.png)

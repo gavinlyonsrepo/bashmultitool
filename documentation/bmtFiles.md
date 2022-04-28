@@ -1,6 +1,19 @@
 | Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtFiles | bmtFilesFunc | 501-505 | File related | bmtFiles.md |
+|  bmtFiles | bmtFilesFunc | 501-508 | File related | bmtFiles.md |
+
+**Section Five,  File**
+
+* 501 Make and enter a formatted directory
+* 502 Check if directory exists and empty
+* 503 Directory exists
+* 504 File exists
+* 505 Device exists
+* 506 File empty
+* 507 File size 
+* 508 File size in bytes
+
+**Sub-Sections**
 
 501) Make formated directory
 
@@ -47,4 +60,34 @@ returns 0 for success, 2 for failure
 
 ```sh
 bmtFilesFunc deviceexists /dev/sda
+```
+
+506) Empty File
+Check if file empty
+returns 0 if not empty , 2 if empty
+
+```sh
+bmtFilesFunc isfileempty "/foo/foo.txt"
+echo $?
+```
+
+507) File size 
+Prints file size and returns 0 if file does not exist returns 2
+```sh
+bmtFilesFunc getfilesize "/foo/foo.txt"
+```
+
+508) File Size in bytes 
+Prints file size and returns 0 if file does not exist returns 2
+```sh
+bmtFilesFunc getfilesizebytes "/foo/foo.txt"
+```
+
+509) Display mime type of input file
+Returns 4 If file/directory does not exist. , 3 If file or mimetype command not found in system.
+2 if missing arguments.
+
+```sh
+echo "$(bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt")" >> /tmp/mytempfile123.txt
+echo $?
 ```

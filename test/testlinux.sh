@@ -1,11 +1,13 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+#shellcheck disable=SC1090 # source "$MYFILE"
+
+# === HEADER ===
 #name: testLinux.sh
 #Description: test file for bashmultitool , bmtLinux
 #Written : Gavin Lyons
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 #Source the lib
 LIBPATH="/home/gavin/Documents/Tech/Scripts/BashMultiTool/lib/"
 for MYFILE in "$LIBPATH"*;
@@ -17,9 +19,10 @@ function Test_Func
 {
 	#check for bad user input
 	bmtLinuxFunc foo
+	echo " "
 	
 	# checkpac
-	echo "check packages"
+	echo "check packages 401"
 	bmtLinuxFunc checkpac "cylondeb"  2  
 	echo "$?"
 	bmtLinuxFunc checkpac "ddsdds" 2 
@@ -31,6 +34,7 @@ function Test_Func
 	
 	# distrocheck
 	echo " "
+	echo "check distro 402"
 	echo "my distro is :-"
 	bmtLinuxFunc distrocheck
 	echo "$?"
@@ -38,20 +42,63 @@ function Test_Func
 	
 	# env text editor check
 	echo " "
-	echo "is text editor set?"
-	echo $EDITOR
+	echo "is text editor set? 403"
+	echo "$EDITOR"
 	bmtLinuxFunc isTextEdSet
 	echo "$?"
 	echo " "
 	
 	# logfile
-	echo "logfile"
-	bmtLinuxFunc log 342  "overflow" mylog /tmp/
-	bmtLinuxFunc log "WARNING" "overflow"  mylog /tmp/
-	bmtLinuxFunc log "INFO" "my measseg"  mylog /tmp/
+	echo "logfile 404"
+	# error handing non valid label test 
+	bmtLinuxFunc log "non valid label test " "overflow" mylog /tmp/
+	echo "$?" 
+	echo " "
 
+	# section subsection
+	bmtLinuxFunc log "WARNING" "overflow"  mylog /tmp/
+	echo "$?" 
+	bmtLinuxFunc log "INFO" "my message"  mylog /tmp/
+	echo "$?" 
+	bmtPrintFunc b_red
+	bmtLinuxFunc log "NOTICE" "my notice"  mylog /tmp/ "MES"
+	bmtPrintFunc norm
+	echo "$?" 
+	echo " "
+	bmtPrintFunc norm
+
+	#  if user exists on the system
+	echo "user check 405"
+	bmtLinuxFunc user "gavin"
+	echo "$?"
+	bmtLinuxFunc user "foo12323"
+	echo "$?"
+	echo " "
+
+	# check if varible set and empty
+	echo "Variable check 406"
+	local varsetfull="foo"
+	local varsetempty=""
+	
+	bmtLinuxFunc isvarempty varsetfull
+	echo "$?"
+	bmtLinuxFunc isvarempty varsetempty
+	echo "$?"
+	bmtLinuxFunc isvarempty foofoo
+	echo "$?"
+	echo " "
+	
+	echo "Root running check 407"
+	bmtLinuxFunc runasroot
+	echo "$?"
+	echo " "
+	
+	echo "Is command  check 408"
+	bmtLinuxFunc iscommand tput
+	echo "$?"
+	bmtLinuxFunc iscommand foofoo
+	echo "$?"
 }
 
-#==================MAIN CODE=============================
 Test_Func
-#====================== END ==============================
+# === END ===

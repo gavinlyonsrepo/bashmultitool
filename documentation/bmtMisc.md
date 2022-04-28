@@ -1,50 +1,49 @@
-| Library file | Function | Sections | Content | help file |
+|| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtMisc  | bmtMiscFunc  | 301-303  | Miscellaneous | bmtMisc.md |
+|  bmtMisc  | bmtMiscFunc  | 801-802  | Miscellaneous | bmtMisc.md |
 
-301) Check website up
 
-Keyword checknet, first option url of website. Returns 0 for connectivity , 2 for no connectivity 
+**Section Eight , misc**
+
+* 801 Password generator 
+* 802 Get laptop battery level
+
+**Sub-Sections**
+
+801)  Password generator 
+Generates a random password in passwordBMT.txt, returns 0 for success.
+Prompts user for length of password. Optional path can be added, if no path added 
+file passed in /tmp/.
 
 ```sh
-bmtMiscFunc checknet "www.google.ie"
+bmtMiscFunc password "/home/foo"
 ```
 
-302) Animation for non-verbose process/commands that take long time
+802) Return laptop battery level
+* Return 0-100 , % of battery remaining , 127 and 128 file errors
+* Param 1 Battery name, BAT0 or BAT1 at /sys/class/power_supply
+* Param 2 "MES" or blank , if exist print message
 
 ```sh
-	# call spinner section put run in background and save PID
-	bmtMiscFunc  spin &
-	pid=$!
-	disown
-	
-	# 'do stuff'
-	echo "START"
-	find ~ -name mint 2>/dev/null 
-	echo "END"
-	
-	# Stop spin function with PID
-	kill $pid 
-	sleep 2
+bmtMiscFunc getbatlevel "BAT0" "MES"
+echo "$?"
+```
+803) Create a multi-line box with text inside it 
+
+1. Param1 color of box , tput setaf , 1 = red
+2. Param2 color of text  , tput setaf , 2 = green
+3. Rest of Params the lines of text
+
+```sh
+bmtMiscFunc drawbox 1 2 'first line' 'second line' 'third line'
 ```
 
-303) Stop watch
-
-Stop watch timer that returns value in seconds between the stop and start
-with a scale of 6. Mircoseconds  1.000000.
-startwatch creates a global variable called __BMT_START_WATCH
-and uses bc - An arbitrary precision calculator language.
-
-```sh
-bmtMiscFunc startWatch
-sleep 2.8
-bmtMiscFunc stopWatch
-# returns  ~ 2.813207
-```
-304) weather
-
-3 day weather forecast by wttr.in
+804) Create a single line box with variable box character. 
+1. Param 1 color of box,  tput setaf 2=green
+2. Param 2 color of text ,  tput setaf 6=cyan
+2. Param2 symbol top make box out of.
+3. Param3 text
 
 ```sh
-bmtMiscFunc weather
+bmtMiscFunc title 2 6 '#' 'hello'
 ```

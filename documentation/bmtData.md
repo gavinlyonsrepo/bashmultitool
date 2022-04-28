@@ -1,6 +1,19 @@
+
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtData | btmDataFunc | 601-606 | Data related | bmtData.md|
+|  bmtData | btmDataFunc | 601-607 | Data related | bmtData.md|
+
+**Section Six, Data**
+
+* 601 integer user input check
+* 602 alphabet user input check
+* 603 alphanumeric user input check
+* 604 convert string to lowercase
+* 605 convert string to uppercase
+* 606 trim white space from string
+* 607 String Length 
+
+**Sub-Sections**
 
 601) integer input check
 
@@ -46,9 +59,17 @@ Returns 0 for alphabet , 2 for non alphabet.
 	echo $result
 ```
 
-606)   trim whitespace from a strin
+606) trim whitespace from a strin
 
 ```sh
 	result2=$(bmtDataFunc trim "       test   "
 	echo $result2
+```
+
+607) String Length 
+Returns string length , maximum 249 , 250 is Null string error.
+
+```sh
+	bmtDataFunc strlen "test string 123" #15
+	echo $?
 ```

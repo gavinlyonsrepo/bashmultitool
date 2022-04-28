@@ -1,20 +1,20 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+# === HEADER ===
 #FileName: bmtFiles
 #Function: Contains file related utilities
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 
 function bmtFilesFunc
 {
 
 case "$1" in
 
-	isdirempty) #1
+	isdirempty) # 501
 		if [ -d "$2" ]; then
 			# the directory exists
 			local checkVar=0
@@ -29,45 +29,95 @@ case "$1" in
 		fi
 	;;
 
-	makedir) #2
+	makedir) #502
 		# make dir  makes a directory at path $2 with time/date stamp and enters it
 		# appends $3 to directory name
-		cd "$2" || return 52
-		local dirVar=""
-		dirVar=$(date +%H%M-%d%b%y)"$3"
-		mkdir -p "$dirVar"
-		cd "$dirVar" || return 52
-		printf '%s\n' "Directory made at:-"
-		pwd
-		return 0
+		if [[ -d "$2" ]]; then
+			cd "$2" || return 51
+			local dirVar=""
+			dirVar=$(date +%H%M-%d%b%y)"$3"
+			mkdir -p "$dirVar"
+			cd "$dirVar" || return 52
+			printf '%s\n' "Directory made at:-"
+			pwd
+			return 0
+		else
+			return 50
+		fi
 	;;
 
-	directoryexists) #3
+	directoryexists) #  503
 	if [[ -d "$2" ]]; then
 		return 0
 	fi
 	return 2
 	;;
 
-	fileexists) #4
+	fileexists) #504
 	if [[ -f "$2" ]]; then
 		return 0
 	fi
 	return 2
 	;;
 
-	deviceexists) #5
+	deviceexists) #  505
 	if [[ -b "$2" ]]; then
 		return 0
 	fi
 	return 2
 	;;
-
+	
+	isfileempty) # 506
+	if [ -s "$2" ]; then
+		return 0 #not empty
+	else
+		return 2
+	fi
+	;;
+	
+	getfilesize) #507
+	if [[ -f "$2" ]]; then
+		du -h "$2" | cut -f1 
+		return 0
+	fi
+	return 2
+	;;
+	
+	getfilesizebytes) #508
+	if [[ -f "$2" ]]; then
+		wc -c  "$2" |  cut -d ' ' -f1
+		return 0
+	fi
+	return 2
+	;;
+	
+	getmimetype) #509
+	 [ -z "$2" ] && return 2
+	
+	local inputdata="${2}"
+	local mime_output
+	
+	if [[ -f "$inputdata" ]] || [[ -d "$inputdata" ]]; then
+		if type -p mimetype &> /dev/null; then
+			mime_output=$(mimetype --output-format %m "$inputdata")
+		elif type -p file &> /dev/null; then
+			mime_output=$(file --brief --mime-type "$inputdata")
+		else
+			return 3
+		fi
+	else
+		return 4
+	fi
+	
+	printf "%s" "${mime_output}"
+	;;
+	
 	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtFiles : bmtFilesFunc"
-		return 50
+		return 255
 	;;
 esac
+
 }
 
 

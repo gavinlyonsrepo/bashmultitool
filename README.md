@@ -1,24 +1,28 @@
 Overview
 --------------------------------------------
 * Name: bashMultiTool
-* Description: A Bash Shell library file for commonly used functions
+* Description: 
+
+A Bash Shell library file for commonly used functions
 can be imported into shell scripts to create functional and colorful 
 scripts and Terminal users interfaces(TUI).
+The library allows user to redefine commonly used functions every time you write a shell script, the library may save a part of the development time.
+
 * Author: Gavin Lyons
+* GNU bash: version 5.1.16
 
 Table of contents
 ---------------------------
 
   * [Installation](#installation)
-  * [Dependencies](#dependencies)
   * [Usage](#usage)
-  * [Files](#files)
   * [Software](#software)
-
+  * [Demo](#demo)
+  
 Installation
 -----------------------------------------------
 
-**Linux debian based systems built on Ubuntu 20.04 LTS (Focal Fossa)**
+**Linux debian based systems built on Ubuntu 22.04 LTS (Jammy Jellyfish)**
  
 A Personal Package Archives (PPA) has been created on Ubuntu
 package building and hosting section of launchpad site 
@@ -35,27 +39,22 @@ sudo apt install bashmultitool
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 1.7 latest release at time of writing
+terminal commands below for version 2.0 latest release at time of writing
 Note: If you install with this method you will not be informed of updates 
 by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/1.7.tar.gz | tar xz
-cd  bashmultitool-1.7
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/2.0.tar.gz | tar xz
+cd  bashmultitool-2.0
 sudo make install
 ```
 **Arch based System** 
 
 It's also available in the Arch Linux user repo AUR
 
-Dependencies
--------------------------------------
-1. GNU bash, version 4.4.18-2  
-
-2. The check website section requires netcat installed. [Netcat](https://en.wikipedia.org/wiki/Netcat)
-
 Usage
 -------------------------------------------
+
 Source the library from your bash shell scripts like so:
 
 ```sh
@@ -64,100 +63,55 @@ for MYFILE in "$LIBPATH"*;
 do
 	source "$MYFILE"
 done
-
-
 ```
 
-There are six files in library and they are independent of each other
+There are eight files in library and they are independent of each other
 you can source them individually if you wish, however the prompt file *is* 
-dependent on print.
-
-Each file has one function, To access functions from your shell scripts type:
-
-
+dependent on print. Each file has one function, To access functions from your shell scripts type:
 
 ```sh
-[functionname] [keyword] [options]
+[function-name] [keyword] [options]
+ 
+[section] [sub-section] [options]
 ```
 
-Six separate markdown help files with detailed information, 
-in documentation folder are available.
-For shortcut to each file click on link in 2nd table in *Files and setup* section below.
-The repo also contains a test folder where test files used in development are available.
-
-A script to print library meta data for test and debug is also installed.
-
-Files and setup
+Software
 -----------------------------------------
 
-| File Path | Description |
-| ------ | ------ |
-| /usr/bin/bashmultitool.sh | Script to print library meta data |
-| /usr/lib/bashmultitool/bashmultitool/*  | 6 library files see next table|
-| /usr/lib/bashmultitool/doc/README.md    | help      |
-| /usr/lib/bashmultitool/doc/documentation/license.md | copyright |
-| /usr/lib/bashmultitool/doc/documentation/changelog.md | history |  
+Eight separate markdown help files with detailed information, 
+in documentation folder are available.
+For shortcut to each help file click on link in 2nd table in *software* section below.
 
+The repo also contains a *test folder* where test files used in development are available,
+one for each library file.
+
+A script to print library meta data is also installed.
+
+| Installed File Path | Description |
+| ------ | ------ |
+| /usr/bin/bashmultitool | Script to print library meta data |
+| /usr/lib/bashmultitool/bashmultitool/*  | 8 library files see next table|
+| /usr/lib/bashmultitool/doc/README.md   | readme  |  
+| /usr/lib/bashmultitool/doc/bmt*.md | 8 Documentation files see next table | 
 
 | Library file | Function | Sections | Content | Doc link |
 | ---- | ---- | ---- | ---- | ---- |
 |  bmtPrint | bmtPrintFunc | 101 | Printing text | [bmtPrint help file](documentation/bmtPrint.md)|
-|  bmtPrompt | bmtPromptFunc | 201-207 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
-|  bmtMisc  | bmtMiscFunc  | 301-304  | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
-|  bmtLinux | bmtLinuxFunc | 401-404 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
-|  bmtFiles | bmtFilesFunc | 501-505 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
-|  bmtData | btmDataFunc | 601-606 | Data related | [bmtData help file](documentation/bmtData.md)|
+|  bmtPrompt | bmtPromptFunc | 201-210 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
+|  bmtNetwork  | bmtNetworkFunc  | 301-302 | Network related | [bmtNetwork help file](documentation/bmtNetwork.md)|
+|  bmtLinux | bmtLinuxFunc | 401-408 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
+|  bmtFiles | bmtFilesFunc | 501-509 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
+|  bmtData | btmDataFunc | 601-607 | Data related | [bmtData help file](documentation/bmtData.md)|
+|  bmtTime | btmTimeFunc | 701-709 | Time related | [bmtTime help file](documentation/bmtTime.md)|
+|  bmtMisc  | bmtMiscFunc  | 801-804 | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
 
-
-Software
-----------------------
-The library contains six files and six functions,
-which contains 27 sections in total.
-The sections are grouped in six files as per logical function.
+The library contains eight section's, Each section has one file with one function.
+which contains 43 sub-sections in total.
+The sections are grouped per logical function.
 Printing, prompting, Linux related, file related, 
-data related and miscellaneous.
+data related, time related , network related and miscellaneous.
 
+Output
+----------------------------
 
-## Section numbered list
-
-* 101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
-
-Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
-
-Modes: normal, bold, underline, background, high intensity,
-bold high intensity, background high intensity.  
- 
-Example Output:
-
-![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/colour_print_example.png)
- 
-* 201 Horizontal lines across terminal in any colour
-* 202 yes-no-quit [y/n/q] prompt
-* 203 YES-no [Y/n] prompt
-* 204 yes-NO [y/N] prompt
-* 205 Anykey to continue prompt in any colour
-* 206 QUIT-no [Q/n] prompt
-* 207 quit-NO [q/N] prompt
-
-* 301 Check if a website is up
-* 302 Spinner Animation for long non-verbose commands
-* 303 Stopwatch / timer
-* 304 Weather forecast
-
-* 401 Check package installed
-* 402 Linux distro family checker
-* 403 Set text editor $EDITOR if not set
-* 404 log file handler
-
-* 501 Make and enter a formated directory
-* 502 check if directory exists and empty
-* 503 directory exists
-* 504 file exists
-* 505 device exists
-
-* 601 integer user input check
-* 602 alphabet user input check
-* 603 alphanumeric user input check
-* 604 convert string to lowercase
-* 605 convert string to uppercase
-* 606 trim whitespace from string
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/example.png)

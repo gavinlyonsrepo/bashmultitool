@@ -1,17 +1,17 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+# === HEADER ===
 #FileName: bmtPrint
 #Function: prints to screen 
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 
-# Name: function for printing text
+# Name: function for printing text , test 101
 # Process: Prints passed text "$2" in 7 modes and 8 colours 
-#  "$1" is keyword. return 0 for ok 127 for error
+#  "$1" is keyword. return 0 for ok 255 for error
 
 function bmtPrintFunc
 {
@@ -49,7 +49,7 @@ case $modeVar in
 	hbg)  modeVar="\033[0;10";; # High intensity backgrounds
 	*) # Catch user typos    
 		printf '%s\n'  "1 Error: Unknown keyword $1 : bashmultitool: bmtPrint: bmtPrintFunc"
-		return 50
+		return 255
 	;;
 esac
 
@@ -65,13 +65,13 @@ case $colorVar in
 	white)colorVar="7m";; 
 	*) # Catch user typos 
 		printf '%s\n'  "Error: Unknown keyword $1 : bashmultitool: bmtPrint: bmtPrintFunc"
-		return 50
+		return 255
 	;;
 esac
 
 # add mode + color strings and print text
 #if no text don't print Carriage return or reset for just color change
-printVar=$(printf "$modeVar$colorVar")
+printVar=$(printf "%s""$modeVar$colorVar")
 if [ -n "$2" ]
 then
 	printf '%s\n' "${printVar}$2${normal}"

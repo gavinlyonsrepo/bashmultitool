@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# === HEADER ===
+#FileName: bmtTime
+#Function: Contains time related  utilities.
+#library name: bashmultitool
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
+
+# === FUNCTIONS ===
+
+function bmtTimeFunc
+{
+
+case "$1" in
+
+	epochconvert) 	# 701
+		[ -z "$2" ] && return 2 
+		local date
+		date=$(date -d "$2" +"%s") || return 3
+		printf "%s" "${date}"
+	;;
+	
+	epochnow) 	# 702
+		local now
+		now="$(date --universal +%s)" || return 2
+		printf "%s" "${now}"
+	;;
+	
+	spin) # 703 animation
+		local spinner=( Ooooo oOooo ooOoo oooOo ooooO oooOo ooOoo oOooo);
+		while true; do
+			for i in "${spinner[@]}";
+			do
+				# no new line , \r reset line
+				echo -ne "\r$i";
+				sleep 0.2;
+			done;
+		done
+	;;
+	
+	# 704  Displays the current timestamp
+	now) date +%s%N ;;
+
+	# 705 Displays the time elapsed between two times
+	elapsed)
+		local startVar="$2"
+		local stopVar="$3"
+		local diffVar="" 
+		#https://serverfault.com/questions/151109/how-do-i-get-current-unix-time-in-milliseconds-using-bash#151112
+		diffVar=$(echo "scale=6;($stopVar - ${startVar})/(1*10^09)" | bc)
+		echo "$diffVar"
+	;;
+	
+	# 706 Starts the timer
+	startWatch)
+		__BMT_START_WATCH=$(bmtTimeFunc now) 
+	;;
+	
+	# 707 Stops the timer
+	stopWatch)
+		if [ -n "$__BMT_START_WATCH" ] 
+		then
+			local stopWatchVar=0
+			stopWatchVar=$(bmtTimeFunc now)
+			bmtTimeFunc elapsed "$__BMT_START_WATCH" "$stopWatchVar" 
+			return 0
+		else
+			return 2
+		fi
+	;;
+	
+	progressbar) #708
+		local k
+		local j
+		local i
+		local count
+		local percent
+		count=0
+		
+		[ -z "$2" ] && return 2
+		
+		while true; do
+			for ((k = 0; k <= 25 ; k++))
+			do
+				echo -n "["
+				for ((i = 0 ; i <= k; i++)); do echo -n "##"; done
+				for ((j = i ; j <= 25 ; j++)); do echo -n ".."; done
+				echo -n "] "
+				percent=$((k * 4))
+				printf "%3d%% : %d\r" "$percent" "$count" 
+				sleep "$2"
+			done
+			count=$((count + 1))
+		done
+	;;
+	
+	dateformat)
+		[ -z "$2" ] && return 2 
+		local timestamp formatstr output
+		timestamp="$2"
+		formatstr="${3:-"%F %T"}"
+		output="$(date -d "@${timestamp}" +"${formatstr}")" || return 3
+		printf "%s" "${output}"
+	;;
+	
+	*) # Catch all users typos
+		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtTime: bmtTimeFunc"
+		return 255
+	;;
+esac
+}
+

@@ -1,11 +1,13 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+#shellcheck disable=SC1090 # source "$MYFILE"
+
+# === HEADER ===
 #name: testprint.sh
 #Description: test file for bashmultitool for file bmtprint
 #Written : Gavin Lyons
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 #Source the lib
 LIBPATH="/home/gavin/Documents/Tech/Scripts/BashMultiTool/lib/"
 for MYFILE in "$LIBPATH"*;
@@ -115,6 +117,6 @@ bmtPrintFunc foo
 
 }
 
-#==================MAIN CODE=============================
+
 Test_Func
-#====================== END ==============================
+#=== END ===

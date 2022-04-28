@@ -1,41 +1,53 @@
 #!/bin/bash
 
-#=========================HEADER==========================================
+# === HEADER ===
 #FileName: bmtPrompt
-#Function: Contains various screen prompts for user.  
+#Function: Contains various screen prompts for user.
 #library name: bashmultitool
 #Written: Gavin Lyons
 #URL: https://github.com/gavinlyonsrepo/BashMultiTool
 
-#====================FUNCTIONS===============================
+# === FUNCTIONS ===
 
 function bmtPromptFunc
 {
-local	normal=$(printf "\033[0m")
-local 	colorVar=""
-if [ -n "$3" ]
-then
-	colorVar="$3"
-else
-	colorVar="b_cyan"
-fi
+local   normal
+normal=$(printf "\033[0m")
+local   colorVar=""
 
-case "$1" in 
+case "$1" in
 
-	
-	line) #1 print  cyan horizontal line of $2 i.e ======
+	line) #201 print  cyan horizontal line of $2 i.e ======
+		if [ -n "$3" ]
+		then
+			colorVar="$3"
+		else
+			colorVar="b_cyan"
+		fi
 		bmtPrintFunc "$colorVar"
 		printf  "%*s\n" "${COLUMNS:-$(tput cols)}" '' | tr ' ' "$2"
 		printf '%s' "${normal}"
 	;;
-	
-	anykey) #2 any key cyan prompt, appends second text input to prompt 
+
+	anykey) #205 any key cyan prompt, appends second text input to prompt
+		if [ -n "$3" ]
+		then
+			colorVar="$3"
+		else
+			colorVar="b_cyan"
+		fi
 		bmtPrintFunc "$colorVar"
 		read -n 1 -r -s -p "Press any key to continue $2"
 		printf '%s\n' "${normal}"
 	;;
-	
-	yesnoquit) #3 print yes no quit prompt [y/n/q]
+
+	yesnoquit) #202 print yes no quit prompt [y/n/q]
+		if [ -n "$2" ]
+		then
+			colorVar="$2"
+		else
+			colorVar="b_cyan"
+		fi
 		local yesnoVar=""
 		while true; do
 			read -r yesnoVar
@@ -43,15 +55,15 @@ case "$1" in
 				[Yy]*) return 0;;
 				[Nn]*) return 2;;
 				[Qq]*) return 3;;
-				*) bmtPrintFunc b_yellow "Please answer: (y/Y for yes) OR (n/N for no) OR (q/Q to quit)!" ;;
+				*) bmtPrintFunc "$colorVar" "Please answer: (y/Y for yes) OR (n/N for no) OR (q/Q to quit)!" ;;
 			esac
 		done
 	;;
-	
-	yesno) #4 print yes no prompt [y/N] or [Y/n] $2 determines option
+
+	yesno) #203 204 print yes no prompt [y/N] or [Y/n] $2 determines option
 		local yesnoVar=""
 		local choiceVar=""
-		
+
 		if [ "$2" = yes ]; then
 			choiceVar="yY"
 		elif [ "$2" = no ]; then
@@ -60,7 +72,7 @@ case "$1" in
 			bmtPrintFunc red "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
 			return 51
 		fi
-		 
+
 		while true; do
 			read -r yesnoVar
 			case $yesnoVar in
@@ -69,11 +81,11 @@ case "$1" in
 			esac
 		done
 	;;
-	
-	quitno) #5 print quit or no prompt [q/N] or [Q/n] $2 determines option
+
+	quitno) #206 207 print quit or no prompt [q/N] or [Q/n] $2 determines option
 		local quitnoVar=""
 		local choiceVar=""
-		
+
 		if [ "$2" = quit ]; then
 			choiceVar="qQ"
 		elif [ "$2" = no ]; then
@@ -82,7 +94,7 @@ case "$1" in
 			bmtPrintFunc red "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
 			return 51
 		fi
-		 
+
 		while true; do
 			read -r quitnoVar
 			case $quitnoVar in
@@ -91,11 +103,67 @@ case "$1" in
 			esac
 		done
 	;;
-	
-	*) # Catch all users typos 
-		bmtPrintFunc red "Error: Unknown keyword : bashMultiTool: bmtPrompt : bmtPromptFunc"
-		return 50
+
+	#208 do you wish to continue
+	wishtocontinue)
+		if [ -n "$3" ]
+		then
+			colorVar="$3"
+		else
+			colorVar="b_cyan"
+		fi
+		
+		local message="$2"
+		local waitingforanswer=true
+		local ynanswer=""
+		bmtPrintFunc "$colorVar"
+
+		while "$waitingforanswer"; do
+			read  -r  -p "$message :: Press 'y/Y' to continue, 'n/N' to Exit::"  ynanswer
+			case "$ynanswer" in
+				[Yy] ) waitingforanswer=false; break;;
+				[Nn] ) exit 1;;
+				*) echo "Please answer either (y/Y) or (n/N).";;
+			esac
+		done
+		echo ""
+		printf '%s' "${normal}"
 	;;
+
+	centertext) #209 print centred text on screen
+		printf "%*s\n" $(((${#2}+$(tput cols))/2)) "$2"
+	;;
+
+	eventstatus) #210 print event status on screen  i.e. event .....  [ status ]
+		 [ -z "$2" ] && return 2
+		 [ -z "$3" ] && return 2
+		if [ -n "$4" ]
+		then
+			colorVar="$4"
+		else
+			colorVar="b_cyan"
+		fi
+		
+		local symbol="." 
+		local noofdots printlength fulloutput symbolline termlength
+		local input1="${2} " 
+		local input2="${3}"
+		
+		bmtPrintFunc "$colorVar"
+		input2="[ $input2 ]"
+		termlength=${COLUMNS:-$(tput cols)}
+		printlength=$(( termlength  - ( ${#input1} + ${#input2} ) ))
+		symbolline="$(printf '%*s' $printlength '')"
+		noofdots=${symbolline// /${symbol}}
+		fulloutput="${input1}${noofdots}${input2}"
+		
+		printf "%s\n" "${fulloutput}"
+	;;
+	
+	*) # Catch all users typos
+		bmtPrintFunc red "Error: Unknown keyword : bashMultiTool: bmtPrompt : bmtPromptFunc"
+		return 255
+	;;
+
 esac
 }
-
