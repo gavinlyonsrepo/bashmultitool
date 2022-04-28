@@ -1,12 +1,14 @@
-|| Library file | Function | Sections | Content | help file |
+| Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtMisc  | bmtMiscFunc  | 801-802  | Miscellaneous | bmtMisc.md |
+|  bmtMisc  | bmtMiscFunc  | 801-804  | Miscellaneous | bmtMisc.md |
 
 
 **Section Eight , misc**
 
 * 801 Password generator 
 * 802 Get laptop battery level
+* 803 Create a multi-line box with text inside it 
+* 804 Create a single line box with variable box character. 
 
 **Sub-Sections**
 

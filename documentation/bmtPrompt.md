@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtPrompt | bmtPromptFunc | 201-208 | Prompts | bmtPrompt.md|
+|  bmtPrompt | bmtPromptFunc | 201-210 | Prompts | bmtPrompt.md|
 
 
 **Section Two,  Prompts**

@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtFiles | bmtFilesFunc | 501-508 | File related | bmtFiles.md |
+|  bmtFiles | bmtFilesFunc | 501-509 | File related | bmtFiles.md |
 
 **Section Five,  File**
 
@@ -12,6 +12,7 @@
 * 506 File empty
 * 507 File size 
 * 508 File size in bytes
+* 509 mime  type exists?
 
 **Sub-Sections**
 

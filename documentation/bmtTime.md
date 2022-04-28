@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtTime  | bmtTimeFunc  | 701-708  | Timing related | bmtTime.md |
+|  bmtTime  | bmtTimeFunc  | 701-709  | Timing related | bmtTime.md |
 
 **Section Seven, Time**
 

@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtLinux | bmtLinuxFunc | 401-407 | Linux related | bmtLinux.md |
+|  bmtLinux | bmtLinuxFunc | 401-408 | Linux related | bmtLinux.md |
 
 **Section Four, Linux**
 
@@ -82,7 +82,7 @@ echo "$?"
 ```
 
 407) Run Script as root check 
-Returns 2 id not running as root
+Returns 2 if not running as root
 
 ```sh
 bmtLinuxFunc runasroot
