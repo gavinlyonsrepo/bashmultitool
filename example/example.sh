@@ -1,31 +1,19 @@
 #!/bin/bash
 
 #==HEADER==
+#  Title : Bashmultitool example.sh
+# Description: 
+# A basic example file to show use of library shown in output  screenshot
+# Readme.md
+# URL: https://github.com/gavinlyonsrepo/bashmultitool
 
-#name: Gavin Lyons
-#Title : Bashmultitool
-#Description: A Bash Shell library for commonly used functions 
-# can be imported into shell scripts to create functional and colorful 
-# scripts and Terminal users interfaces(TUI). This file is placeholder
-# for library with meta data 
-#URL: https://github.com/gavinlyonsrepo/bashmultitool
-
+# Source the library
 LIBPATH="/usr/lib/bashmultitool/"
 for MYFILE in "$LIBPATH"*;
 do
 	source "$MYFILE"
 done
-
-# === GLOBAL VARIABLES SETUP ===
-
-# === FUNCTIONS===
-#FUNCTION HEADER
-# NAME : 
-# DESCRIPTION :   
-# INPUTS : 
-# PROCESS :
-# OUTPUT :
-# NOTES:    
+   
 function Display_Func
 {
 	bmtMiscFunc title 3 2 '#' "Bashmultitool library Demo"
@@ -53,7 +41,7 @@ function Display_Func
 				bmtTimeFunc  progressbar 1 &
 				pid=$!
 				disown
-				sleep 25 #do stuff
+				sleep 25 # do here stuff
 				echo " "
 				bmtPromptFunc eventstatus "Log File uploaded" "OK" b_green
 				# Stop spin function with PID
