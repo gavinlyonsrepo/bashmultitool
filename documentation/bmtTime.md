@@ -79,3 +79,10 @@ percentage completed.
 	sleep 2
 	echo " "
 ```
+
+709) Convert Epoch time to date format
+
+```sh
+bmtTimeFunc dateformat "1651084921" "%FT%T%z"
+# prints ~ 2022-04-27T19:42:01+0100
+```

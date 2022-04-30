@@ -24,8 +24,8 @@ Keyword is line, first option the character, second option is colour,
 if no colour passed default is "bold cyan"
 
 ```sh
-	bmtPromptFunc line    "=" 
-	bmtPromptFunc line    "8" red
+bmtPromptFunc line    "=" 
+bmtPromptFunc line    "8" red
 ```
 
 202) yes-no-quit prompt y/n/q
@@ -92,8 +92,9 @@ bmtPromptFunc quitno no
 Returns 0 for no , 2 for quit , 50 for bad user option
 
 208)  Wish to continue loop prompt 
-Exits program if user presses N , continues if user presses yes
-Message optional and custom.
+Exits program if user presses N , continues if user presses yes.
+Param1 Message Custom. Param2 is colour,
+if no colour passed default is "bold cyan"
 
 ```sh
 bmtPromptFunc wishtocontinue "Do you wish to contine?"
@@ -105,6 +106,10 @@ bmtPromptFunc centertext "Hello World."
 ````
 
 210) Print an event status , Installing bashMultiTool ...... [OK]
+
+* Param 1 text on  left 
+* Param 2 text on right
+* Param 3 colour , if no colour passed default is "bold cyan"
 
 ```sh
 bmtPromptFunc eventstatus "Installing bashMultiTool" "OK" 
