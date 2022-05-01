@@ -92,6 +92,6 @@ bmtLinuxFunc runasroot
 Returns 2 if command does not exist on system.
 
 ```sh
-	bmtLinuxFunc iscommand tput
-	echo "$?"
+bmtLinuxFunc iscommand tput
+echo "$?"
 ```

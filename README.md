@@ -36,6 +36,10 @@ sudo apt update
 sudo apt install bashmultitool
 ```
 
+**Arch based System** 
+
+Package available in the Arch Linux user repo AUR
+
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
@@ -48,9 +52,6 @@ curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/2.0.tar.gz | ta
 cd  bashmultitool-2.0
 sudo make install
 ```
-**Arch based System** 
-
-It's also available in the Arch Linux user repo AUR
 
 Usage
 -------------------------------------------

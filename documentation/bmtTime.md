@@ -29,7 +29,7 @@ bmtTimeFunc epochnow
 
 ```sh
 	# call spinner section put run in background and save PID
-	bmtMiscFunc  spin &
+	bmtTimeFunc  spin &
 	pid=$!
 	disown
 	
@@ -51,9 +51,9 @@ startwatch creates a global variable called _BMT_START_WATCH
 and uses bc  An arbitrary precision calculator language.
 
 ```sh
-bmtMiscFunc startWatch
+bmtTimeFunc startWatch
 sleep 2.8
-bmtMiscFunc stopWatch
+bmtTimeFunc stopWatch
 # returns  ~ 2.813207
 ```
 708) Progress Bar

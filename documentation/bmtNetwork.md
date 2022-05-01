@@ -14,7 +14,7 @@
 Keyword checknet, first option url of website. Returns 0 for connectivity , 2 for no connectivity 
 
 ```sh
-bmtMiscFunc checknet "www.google.ie"
+bmtNetworkFunc checknet "www.google.ie"
 ```
 
 302) weather
@@ -25,5 +25,5 @@ Weather report by wttr.in, uses wget utility
 2. Param2 format 1-4
 
 ```sh
-bmtMiscFunc weather Dublin 4
+bmtNetworkFunc weather Dublin 4
 ```

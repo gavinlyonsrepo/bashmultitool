@@ -48,28 +48,28 @@ Returns 0 for alphabet , 2 for non alphabet.
 604)  convert a string to lowercase
 
 ```sh
-	result=$(bmtDataFunc lowercase "TEST")   
-	echo $result
+result=$(bmtDataFunc lowercase "TEST")   
+echo $result
 ```
 
 605)   convert a string to uppercase
 
 ```sh
-	result=$(bmtDataFunc upperrcase "test")   
-	echo $result
+result=$(bmtDataFunc upperrcase "test")   
+echo $result
 ```
 
 606) trim whitespace from a strin
 
 ```sh
-	result2=$(bmtDataFunc trim "       test   "
-	echo $result2
+result2=$(bmtDataFunc trim "       test   "
+echo $result2
 ```
 
 607) String Length 
 Returns string length , maximum 249 , 250 is Null string error.
 
 ```sh
-	bmtDataFunc strlen "test string 123" #15
-	echo $?
+bmtDataFunc strlen "test string 123" #15
+echo $?
 ```
