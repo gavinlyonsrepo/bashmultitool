@@ -80,7 +80,7 @@ Software
 
 Eight separate markdown help files with detailed information, 
 in documentation folder are available.
-For shortcut to each help file click on link in 2nd table in *software* section below. The repo also contains a *test folder* where test files used in development are available, one for each library file.
+For shortcut to each help file click on link in 2nd table below. 
 A script to print library meta data is also installed.
 
 | Installed File Path | Description |
@@ -100,7 +100,7 @@ A script to print library meta data is also installed.
 |  bmtData | btmDataFunc | 601-607 | Data related | [bmtData help file](documentation/bmtData.md)|
 |  bmtTime | btmTimeFunc | 701-709 | Time related | [bmtTime help file](documentation/bmtTime.md)|
 |  bmtMisc  | bmtMiscFunc  | 801-804 | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
-|  bmtTest  | bmtTestFunc  | 901 |  Test the library | [bmtTest help file](documentation/bmtTest.md)|
+|  bmtTest  | bmtTestFunc  | 901 |  library testing | [bmtTest help file](documentation/bmtTest.md)|
 
 The library contains eight section's, Each section has one file with one function. 
 Which contains 50 sub-sections in total.
@@ -109,7 +109,9 @@ Printing, prompting, Linux related, file related,
 data related, time related , network related and miscellaneous.
 The sections are mostly independent of each other
 you can source them individually if you wish, however the prompt file *is* 
-dependent on print. Each file has one function,
+dependent on print. There is also  a ninth test section bmtTest used to test library.
+
+The repo also contains a *test folder* where test files used in development are available, one for each library file. There is also a testTest.sh which runs an semi-automated test on entire library and produces a report.
 
 Example
 ----------------------------
@@ -118,6 +120,6 @@ Output of basic example file in example folder, showing basic usage.
 
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/example.png)
 
-Output report of test section.
+Output report of test script testTest.sh.
 
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/test.png)
