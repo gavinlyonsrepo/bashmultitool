@@ -21,93 +21,98 @@ function Test_Func
 {
 
 #check for bad user input
-echo "Keyword error handling"
+echo "Error handling :"
 bmtFilesFunc foo
-echo " "
-
-#make dir
-echo "MAKE DIR Test 501"            
-bmtFilesFunc makedir "/tmp/" "-TEST"
-echo $?
-bmtFilesFunc makedir "/foo/" "-foo"
-echo $?
-echo " "
+bmtTestFunc "$?" 255 "50E-a"
+bmtFilesFunc
+bmtTestFunc "$?" 255 "50E-b"
+echo
 
 # 'dir empty '
-echo "DIR EMPTY Test 502"
+echo "DIR EMPTY Test 501"
 bmtFilesFunc isdirempty "$TESTOBJECTS/EmptyDir/"
-echo $?
+bmtTestFunc "$?" 0 "501-a" # empty
 bmtFilesFunc isdirempty "$TESTOBJECTS/NonEmptyDir/"
-echo $?
-bmtFilesFunc isdirempty "/foo/foo"
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "501-b" # non -empty
+bmtFilesFunc isdirempty "/foo/foo" 
+bmtTestFunc "$?" 3 "501-c" # does not exist
+echo 
 
-
+#make dir
+echo "MAKE DIR Test 502"            
+bmtFilesFunc makedir "/tmp/" "-TEST"
+bmtTestFunc "$?" 0 "502-a"  # success
+bmtFilesFunc makedir "/foo/" "-foo" 
+bmtTestFunc "$?" 50 "502-b" # path does not exist
+bmtFilesFunc makedir "/usr/" "-iamnotroot" 
+bmtTestFunc "$?" 52 "502-c" # Could not make directory , Permissions maybe
+echo 
 
 # dir exists
 echo "DIR exist 503" 
 bmtFilesFunc directoryexists /tmp/
-echo $?
+bmtTestFunc "$?" 0 "503-a"  # success
 bmtFilesFunc directoryexists /tmp/foo
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "503-b"  # fail
+echo
 
 # File exists
 echo "File exist 504" 
 bmtFilesFunc fileexists "$TESTOBJECTS/full.txt"
-echo $?
+bmtTestFunc "$?" 0 "504-a"  # success
 bmtFilesFunc fileexists /tmp/foo.txt
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "504-b"  # fail
+echo 
 
 
 # Device exists
 echo "device exist 505" 
 bmtFilesFunc deviceexists /dev/sda
-echo $?
+bmtTestFunc "$?" 0 "505-a"  # success
 bmtFilesFunc deviceexists /dev/sdf
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "505-b"  # fail
+echo 
 
 # File empty
 echo "file empty 506"
 bmtFilesFunc isfileempty "$TESTOBJECTS/full.txt"
-echo $?
+bmtTestFunc "$?" 0 "506-a"  # success
 bmtFilesFunc isfileempty "$TESTOBJECTS/empty.txt"
-echo $?
+bmtTestFunc "$?" 2 "506-b"  # fail
 echo " "
 
 # Get file size 
 echo "getfilesize 507"
 bmtFilesFunc getfilesize "$TESTOBJECTS/tv.png"
-echo $?
+bmtTestFunc "$?" 0 "507-a"  # success
+bmtTestFunc 1 1 "507-b"  "NOAUTO"
 bmtFilesFunc getfilesize "/foo/foo.txt"
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "507-c"  # fail
+echo 
 
 echo "getfilesizebytes 508"
 bmtFilesFunc getfilesizebytes "$TESTOBJECTS/tv.png"
-echo $?
+bmtTestFunc "$?" 0 "508-a"  # success
+bmtTestFunc 1 1 "508-b"  "NOAUTO"
 bmtFilesFunc getfilesizebytes "/foo/foo.txt"
-echo $?
-echo " "
+bmtTestFunc "$?" 2 "508-c"  # fail
+echo 
 
 echo "Get mime type of provided input 509"
 # print to console
 bmtFilesFunc getmimetype "$TESTOBJECTS/tv.png"
-echo $?
-echo " "
+echo 
+bmtTestFunc 1 1 "509-a"  "NOAUTO"
+echo 
 
-#  print to echo and send to a file
-echo "$(bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt")" >> /tmp/mytempfile123.txt
-echo $?
-echo " "
+#   send to a file
+bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt" >> /tmp/mytempfile123.txt
+echo  " /tmp/mytempfile123.txt file created"
+bmtTestFunc 1 1 "509-b"  "NOAUTO"
 
-# print to console
-bmtFilesFunc getmimetype "foo/foo/tv.png"
-echo $?
-echo " "
+bmtFilesFunc getmimetype "/foo/foo/tv.png"
+bmtTestFunc "$?" 4 "509-c"  # file does not exit
+
 }
 
 Test_Func

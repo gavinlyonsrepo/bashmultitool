@@ -15,19 +15,23 @@ do
 	source "$MYFILE"
 done
 
+
 function Test_Func
 {
 
-#error handling check(catch typos)
+#error handling check(catch typos) 60E
 echo  "Error handling"
-bmtPrintFunc foo
+bmtPrintFunc 
+bmtTestFunc "$?" 255 "10E-a"
+bmtPrintFunc foofoo
+bmtTestFunc "$?" 255 "10E-b"
 
 #print text
 	     
 	#reg 1
-	echo ""
+	echo
 	bmtPrintFunc norm "reg colours"
-	echo ""
+	echo
 	bmtPrintFunc black "black"
 	bmtPrintFunc red "red "
 	bmtPrintFunc green "green "
@@ -38,9 +42,9 @@ bmtPrintFunc foo
 	bmtPrintFunc white "white  " #light grey
 	
 	#bold 2
-	echo ""
+	echo
 	bmtPrintFunc norm "bold colours"
-	echo ""
+	echo
 	bmtPrintFunc b_black "bold black " #dark grey
 	bmtPrintFunc b_red "bold red  "
 	bmtPrintFunc b_green "bold green  "
@@ -51,9 +55,9 @@ bmtPrintFunc foo
 	bmtPrintFunc b_white "bold white  "
 	
 	# underline 3
-	echo ""
+	echo
 	bmtPrintFunc norm "underline colours"
-	echo ""
+	echo
 	bmtPrintFunc u_black "underline black "
 	bmtPrintFunc u_red "underline red"
 	bmtPrintFunc u_green "underline green  "
@@ -64,9 +68,9 @@ bmtPrintFunc foo
 	bmtPrintFunc u_white "underline white  "
 
 	# background  4
-	echo ""
+	echo
 	bmtPrintFunc norm "background colours"
-	echo ""
+	echo
 	bmtPrintFunc bg_black "background black "
 	bmtPrintFunc bg_red "background red  "
 	bmtPrintFunc bg_green "background green  "
@@ -77,9 +81,9 @@ bmtPrintFunc foo
 	bmtPrintFunc bg_white "background white  " #very light grey
 			
 	# high intensity bold 5
-	echo ""
+	echo
 	bmtPrintFunc norm "high intensity  colours"
-	echo ""
+	echo
 	bmtPrintFunc i_black "high intensity black " #very dark grey
 	bmtPrintFunc i_red "high intensity  red  "
 	bmtPrintFunc i_green "high intensity  green  "
@@ -90,9 +94,9 @@ bmtPrintFunc foo
 	bmtPrintFunc i_white "high intensity white  "
 	
 	# high intensity bold 6
-	echo ""
+	echo
 	bmtPrintFunc norm "high intensity bold  colours"
-	echo ""
+	echo
 	bmtPrintFunc bh_black "high intensity bold black " #very dark grey
 	bmtPrintFunc bh_red "high intensity bold red  "
 	bmtPrintFunc bh_green "high intensity bold green  "
@@ -103,9 +107,9 @@ bmtPrintFunc foo
 	bmtPrintFunc bh_white "high intensity bold white  "
 	
 	# high intensity bold 7
-	echo ""
+	echo
 	bmtPrintFunc norm "high intensity background colours"
-	echo ""
+	echo
 	bmtPrintFunc hbg_black "high intensity background black " #light grey
 	bmtPrintFunc hbg_red "high intensity background red  "
 	bmtPrintFunc hbg_green "high intensity background green  "
@@ -114,9 +118,9 @@ bmtPrintFunc foo
 	bmtPrintFunc hbg_purple "high intensity background purple  "
 	bmtPrintFunc hbg_cyan "high intensity background cyan  "
 	bmtPrintFunc hbg_white "high intensity background white  " # very light grey
-
+	bmtTestFunc 1 1 "101-a" "NOAUTO"
 }
 
-
+bmtTestFunc 1 1 "START"
 Test_Func
 #=== END ===

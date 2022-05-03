@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# === HEADER ===
+#FileName: bmtTest
+#Function: Contains a test function for automated testing library
+#library name: bashmultitool
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
+
+# === FUNCTIONS ===
+
+function bmtTestFunc
+{
+
+local urlTestDir="$HOME/Documents/Tech/Scripts/BashMultiTool/test/testlog/"
+mkdir -p "$urlTestDir"  
+local TestFile="test"
+
+case "$3" in
+	START)  # Start message
+			bmtPrintFunc norm "Delete log file if exists"
+			rm -iv "$urlTestDir""$TestFile.log" 
+			bmtLinuxFunc log "NOTICE" "Run Start"  "$TestFile" "$urlTestDir" ;;
+	END)
+		# End message
+		if [ "$3" == "END"  ] 
+		then
+			bmtLinuxFunc log "NOTICE" "Run Over"  "$TestFile" "$urlTestDir"
+			bmtPrintFunc norm  "=== End Automatic Tests ==="
+			bmtPromptFunc anykey " " norm
+			clear
+			bmtMiscFunc title 14 226  "#" "             BashMultiTool library :: Test Results :: $TestFile.log              " 
+			bmtPromptFunc eventstatus "Test Total" "$(grep -c "Test" "$urlTestDir""$TestFile.log"   )"  b_white
+			bmtPromptFunc eventstatus "Test Passed" "$(grep -c "PASSED" "$urlTestDir""$TestFile.log" )"  b_green
+			bmtPromptFunc eventstatus "Test Failed" "$(grep -c "FAILED" "$urlTestDir""$TestFile.log" )"  b_red
+			bmtPromptFunc eventstatus "Test Errors" "$(grep -c "ERROR" "$urlTestDir""$TestFile.log" )"  b_yellow
+			bmtPromptFunc line  "="
+			
+			# View File
+			bmtPromptFunc anykey "and view test log file." norm
+			cat "$urlTestDir""$TestFile.log"
+			bmtPromptFunc line  "="
+			bmtPromptFunc anykey "and delete test log file." norm
+			#remove file?
+			rm -iv "$urlTestDir""$TestFile.log"
+			bmtPromptFunc line  "="
+		fi
+		;;
+	*)
+	if [ "$4" == "NOAUTO" ] # non -automatic test 
+	then
+		local yesnoVar=""
+		while true; do
+			bmtPrintFunc norm "Did Test $3 pass? [y/n/q]"
+			read -r yesnoVar
+			case $yesnoVar in
+				[Yy]*) bmtLinuxFunc log "PASSED" "Test $3 Result :: User Check"  "$TestFile" "$urlTestDir"  && return 0;;
+				[Nn]*) bmtLinuxFunc log "FAILED" "Test $3 Result :: User Check"  "$TestFile"  "$urlTestDir"	&& return 2;;
+				[Qq]*) 
+					bmtLinuxFunc log "ERROR" "User aborted Test at $3"  "$TestFile"  "$urlTestDir"
+					return 3
+				;;
+				*) bmtPrintFunc b_yellow "Please answer: (y/Y for yes) OR (n/N for no) OR (q/Q to quit)!";;
+			esac
+		done
+	else
+		if  [ "$1" -eq "$2" ] # Automatic test 
+		then 
+			bmtLinuxFunc log "PASSED" "Test $3 Result :: $1 $2"  "$TestFile" "$urlTestDir" 
+			return 0
+		else
+			bmtLinuxFunc log "FAILED" "Test $3 Result :: $1 $2"  "$TestFile"  "$urlTestDir" 
+			return 2
+		fi
+	fi
+	;;
+esac
+}
+

@@ -4,8 +4,8 @@
 
 **Section Five,  File**
 
-* 501 Make and enter a formatted directory
-* 502 Check if directory exists and empty
+* 501 Check if directory exists and empty
+* 502 Make and enter a formatted directory
 * 503 Directory exists
 * 504 File exists
 * 505 Device exists
@@ -86,9 +86,9 @@ bmtFilesFunc getfilesizebytes "/foo/foo.txt"
 
 509) Display mime type of input file
 Returns 4 If file/directory does not exist. , 3 If file or mimetype command not found in system.
-2 if missing arguments.
+2 if missing arguments, 0 for success. 
 
 ```sh
-echo "$(bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt")" >> /tmp/mytempfile123.txt
+bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt" >> /tmp/mytempfile123.txt
 echo $?
 ```

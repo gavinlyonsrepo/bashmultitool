@@ -19,85 +19,86 @@ function Test_Func
 {
 	#check for bad user input
 	bmtLinuxFunc foo
-	echo " "
-	
+	bmtTestFunc "$?" 255 "40E-a"
+	bmtLinuxFunc foo
+	bmtTestFunc "$?" 255 "40E-b"
+
 	# checkpac
-	echo "check packages 401"
-	bmtLinuxFunc checkpac "cylondeb"  2  
-	echo "$?"
-	bmtLinuxFunc checkpac "ddsdds" 2 
-	echo "$?"
+	printf "\n%s\n" "check packages 401"
+	bmtLinuxFunc checkpac "cylondeb"  2  #installed package
+	bmtTestFunc "$?" 0 "401-a"
+	bmtLinuxFunc checkpac "foooodds" 2  #non installed package 
+	bmtTestFunc "$?" 2 "401-b"
 	
-	bmtLinuxFunc checkpac "igkfnmgi"  2  "MES"
-	bmtLinuxFunc checkpac "cylondeb"  2  "MES"
-	bmtLinuxFunc checkpac "firefox"  2  "MES"
+	bmtLinuxFunc checkpac "cylondeb"  2  "MES" #installed package
+	bmtTestFunc "$?" 0 "401-c"
+	bmtLinuxFunc checkpac "fooigkfnmgi"  2  "MES" #non installed package 
+	bmtTestFunc "$?" 2 "401-d"
+
 	
 	# distrocheck
-	echo " "
-	echo "check distro 402"
+	printf "\n%s\n" " check distro 402"
 	echo "my distro is :-"
 	bmtLinuxFunc distrocheck
-	echo "$?"
+	bmtTestFunc "$?" 4 "402-a"
 	
 	
 	# env text editor check
-	echo " "
-	echo "is text editor set? 403"
+	echo 
+	printf "\n%s\n" "Is text editor set? 403"
 	echo "$EDITOR"
 	bmtLinuxFunc isTextEdSet
 	echo "$?"
-	echo " "
+	echo "$EDITOR"
+	bmtTestFunc 1 1 "403-a" "NOAUTO"
 	
 	# logfile
-	echo "logfile 404"
+	printf "\n%s\n" "logfile 404"
 	# error handing non valid label test 
 	bmtLinuxFunc log "non valid label test " "overflow" mylog /tmp/
-	echo "$?" 
-	echo " "
+	bmtTestFunc "$?" 55 "404-a" 
+	echo
 
 	# section subsection
 	bmtLinuxFunc log "WARNING" "overflow"  mylog /tmp/
-	echo "$?" 
+	bmtTestFunc "$?" 0 "404-b"
 	bmtLinuxFunc log "INFO" "my message"  mylog /tmp/
-	echo "$?" 
+	bmtTestFunc "$?" 0 "404-c"  
 	bmtPrintFunc b_red
 	bmtLinuxFunc log "NOTICE" "my notice"  mylog /tmp/ "MES"
+	bmtTestFunc "$?" 0 "404-d" 
 	bmtPrintFunc norm
-	echo "$?" 
-	echo " "
-	bmtPrintFunc norm
-
+	bmtTestFunc 1 1 "404-e" "NOAUTO"
+	
 	#  if user exists on the system
-	echo "user check 405"
+	printf "\n%s\n" "user check 405"
 	bmtLinuxFunc user "gavin"
-	echo "$?"
+	bmtTestFunc "$?" 0 "405-a" 
 	bmtLinuxFunc user "foo12323"
-	echo "$?"
-	echo " "
+	bmtTestFunc "$?" 2 "405-b" 
+
 
 	# check if varible set and empty
-	echo "Variable check 406"
+	printf "\n%s\n" "Variable check 406"
 	local varsetfull="foo"
 	local varsetempty=""
 	
 	bmtLinuxFunc isvarempty varsetfull
-	echo "$?"
+	bmtTestFunc "$?" 0 "406-a" 
 	bmtLinuxFunc isvarempty varsetempty
-	echo "$?"
+	bmtTestFunc "$?" 2 "406-b" 
 	bmtLinuxFunc isvarempty foofoo
-	echo "$?"
-	echo " "
+	bmtTestFunc "$?" 3 "406-c" 
 	
-	echo "Root running check 407"
+	printf "\n%s\n" "Root running check 407"
 	bmtLinuxFunc runasroot
-	echo "$?"
-	echo " "
+	bmtTestFunc "$?" 2 "407-a" 
 	
-	echo "Is command  check 408"
+	printf "\n%s\n"  "Is command  check 408"
 	bmtLinuxFunc iscommand tput
-	echo "$?"
+	bmtTestFunc "$?" 0 "408-a" 
 	bmtLinuxFunc iscommand foofoo
-	echo "$?"
+	bmtTestFunc "$?" 2 "408-b" 
 }
 
 Test_Func

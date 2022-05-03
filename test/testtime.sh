@@ -17,41 +17,40 @@ done
 function Test_Func
 {
 	# error handling check(catch typos)
-	echo "Error handling"
+	printf  "%s\n"  "Error handling"
 	bmtTimeFunc
+	bmtTestFunc "$?" 255 "70E-a"
 	bmtTimeFunc foo
-	echo " "
+	bmtTestFunc "$?" 255 "70E-b"
 	
-	# 701
-	echo "Test 701 "
-	echo "Convert time to  epoch time ::"
+	# 701 , prints 1651084921
+	printf  "\n%s\n" "701-a Convert time to  epoch time ::"
 	bmtTimeFunc epochconvert "2022-04-27 19:42:01 "
-	# prints 1651084921
-	echo " "
+	printf  "%s\n"  " Pass :: 1651084921"
+	bmtTestFunc 1 1 "701-a" "NOAUTO"
+
 	# 702
-	echo "Test 702 "
-	echo "Current time Stamp ::"
+	printf  "\n%s\n"  "702-b Current time Stamp ::"
 	bmtTimeFunc epochnow
-	echo " "
+	echo
+	bmtTestFunc 1 1 "702-b" "NOAUTO"
 	
 	# 703 call spinner function put run in background and save PID
-	echo " "
-	echo "Test 703 "
+	printf  "\n%s\n" "Test 703-a  spinner"
+	
 	bmtTimeFunc  spin &
 	pid=$!
 	disown
-	echo "START"
-	echo " "
-	sleep 10 #do stuff
-	echo " "
-	echo "END"
-	# Stop spin function with PID
-	kill $pid
-	sleep 2
-	echo " "
+	
+	sleep 10 # Do stuff here 
+	
+	kill $pid 	# Stop spin function with PID
+	sleep 1
+	echo 
+	bmtTestFunc 1 1 "703-a" "NOAUTO"
 
 	# 704-707
-	echo "Test 704-707"
+	printf  "\n%s\n" "Test 704-707 Stopwatch timer"
 	bmtTimeFunc startWatch
 	sleep .100
 	bmtTimeFunc stopWatch
@@ -63,33 +62,44 @@ function Test_Func
 	echo " 1.0 S"
 
 	bmtTimeFunc startWatch
-	sleep 2.8
+	sleep 4.8
 	bmtTimeFunc stopWatch
-	echo " 2.8 S"
-
+	echo " 4.8 S"
+	bmtTestFunc 1 1 "704-a" "NOAUTO"
+	
 	# 708 call progressbar function put run in background and save PID
-	echo " "
-	echo "Test 708 "
+
+	printf  "\n%s\n" "Test 708 progress bar "
 	bmtTimeFunc  progressbar 1 &
 	pid=$!
 	disown
-	echo "START"
 	sleep 25 #do stuff
-	echo " "
-	echo "END"
-	# Stop spin function with PID
-	kill $pid
-	sleep 2
-	echo " "
+	kill $pid 	# Stop spin function with PID
+	sleep 1
+	echo
+	bmtTestFunc 1 1 "708-a" "NOAUTO"
 	
 	#709 
-	echo "Test 709 "
+	printf  "\n%s\n" "Test 709 "
 	bmtTimeFunc dateformat "1651084921" 
-	echo " "
-	# prints ~ 2022-04-27 19:42:01 
+	printf  "\n%s\n" " Pass :: 2022-04-27 19:42:01"
+
 	bmtTimeFunc dateformat "1651084921" "%FT%T%z"
-	echo " "
-	# prints ~ 2022-04-27T19:42:01+0100
+	printf  "\n%s\n" " Pass :: 2022-04-27T19:42:01+0100"
+	
+	bmtTestFunc 1 1 "709-a" "NOAUTO"
+
+	#701 702 & 709 combined
+	local timeVar2
+	local timeVar
+	printf  "\n%s\n" " Test 70X-a 701 702 and  709 combined"
+	timeVar="$(bmtTimeFunc epochnow)"  # get current time in epoch seconds
+	printf  "%s\n" "Epoch time in :: $timeVar"
+	timeVar2="$(bmtTimeFunc dateformat "$timeVar")" # Convert that to a date time
+	printf  "%s\n%s" "Time converted :: $timeVar2" "Epoch Time Out :: "
+	bmtTimeFunc epochconvert "$timeVar2" #  Convert back to epoch
+	echo
+	bmtTestFunc 1 1 "70X-a" "NOAUTO"
 }
 
 # === MAIN CODE ===

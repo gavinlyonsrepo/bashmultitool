@@ -20,63 +20,69 @@ done
 function Test_Func
 {
 	echo "Error handling check"
-	bmtDataFunc foo
-	echo " "
+	bmtDataFunc foofoo
+	bmtTestFunc "$?" 255 "60E-a"
+	bmtDataFunc 
+	bmtTestFunc "$?" 255 "60E-b"
 	
-	# intcheck
-	echo "601"
-	echo "Enter an integer"
+	# intcheck 601
+	printf  "\n%s\n"  "601-a Enter an integer"
 	read -r ID
 	bmtDataFunc intcheck "$ID"
-	echo "$?"
-	echo " "
-	
-	## alphanumeric check 2
-	echo "602"
-	echo "Enter an alpha numeric string"
+	bmtTestFunc "$?" 0 "601-a"
+
+	printf  "\n%s\n"  "601-b Enter a NON integer"
+	read -r ID
+	bmtDataFunc intcheck "$ID"
+	bmtTestFunc "$?" 2 "601-b"
+
+	## alphanumeric 602
+	printf  "\n%s\n" "602-a Enter an alpha numeric string"
 	read -r ID1
 	bmtDataFunc alphanumcheck "$ID1"
-	echo "$?"
-	echo " "
+	bmtTestFunc "$?" 0 "602-a"
 	
-	## alphanuc check 3
-	echo "603"
-	echo "Enter an alpha string"
+	printf  "\n%s\n" "602-b Enter a NON alpha numeric string"
+	read -r ID1
+	bmtDataFunc alphanumcheck "$ID1"
+	bmtTestFunc "$?" 2 "602-b"
+	
+	## alpha check 603
+	printf  "\n%s\n" "603-a Enter an alphabetical string"
 	read -r ID2
 	bmtDataFunc alphacheck "$ID2"
-	echo "$?"
-	echo " "
+	bmtTestFunc "$?" 0 "603-a"
+
+	printf  "\n%s\n" "603-b Enter an NON alphabetical string"
+	read -r ID2
+	bmtDataFunc alphacheck "$ID2"
+	bmtTestFunc "$?" 2 "603-b"
 	
-	## lowercase 4
-	echo "604"
-	echo "lowercasetest"
+	# lowercase 
+	printf  "\n%s\n" "604 lowercase test"
 	result=$(bmtDataFunc lowercase "TEST")   # or result=`myfunc`
-	echo "$result"
-	echo " "
+	printf  "%s\n" "$result"
+	bmtTestFunc 1 1 "604-a"  "NOAUTO"
 	
-	##uppercase 5
-	echo "605"
-	echo "uppercasetest"
+	#uppercase 
+	printf  "\n%s\n" "605 uppercase test"
 	result1=$(bmtDataFunc uppercase "test")
-	echo "$result1"
-	echo " "
+	printf  "%s\n" "$result1"
+	bmtTestFunc 1 1 "605-a"  "NOAUTO"
 	
-	## trim 6
-	echo "606"
-	echo "trim test"
+	# trim 
+	printf  "\n%s\n" "606 trim test"
 	mytrim="       test   "
 	result2=$(bmtDataFunc trim "$mytrim")
-	echo "$result2"
-	echo " "
+	printf  "%s\n" "$result2"
+	bmtTestFunc 1 1 "606-a"  "NOAUTO"
 
-	## string length 7
-	echo "607 string length test"
+	# string length 
+	printf  "\n%s\n" "607 string length test"
 	bmtDataFunc strlen "test string 123" # 15
-	echo $?
-	echo " "
+	bmtTestFunc "$?" 15 "607-a"
 	bmtDataFunc strlen "" #report 250 error
-	echo $?
-	echo " "
+	bmtTestFunc "$?" 250 "607-b"
 }
 
 Test_Func

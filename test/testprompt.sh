@@ -18,123 +18,111 @@ done
 function Test_Func
 {
 	#error handling check(catch user typos)
-	echo "Error handling"
+	echo "Error handling :: "
+	bmtPromptFunc 
+	bmtTestFunc "$?" 255 "20E-a"
 	bmtPromptFunc foo
-	echo $?
-	echo " "
+	bmtTestFunc "$?" 255 "20E-b"
 	
 	#draw a line 201
-	echo "Test 201  "
+	printf  "\n%s\n"  "Test 201 :: Draw Line  "
 	bmtPromptFunc line    "="  red
-	echo "my text here"
-	bmtPromptFunc line    "8" 
-	echo "my text here"
-	echo " "
+	printf  "%s\n" "Before Line"
+	bmtPromptFunc line    "+" 
+	printf  "%s\n\n" "After line"
+	
 	bmtPromptFunc line    "="  green
-	bmtPromptFunc line    "="  green
-	echo " "
+	bmtPromptFunc line    "#"  b_cyan
+	bmtTestFunc 1 1 "201-a" "NOAUTO"
 	
-	#yesnoquit 202
-	echo "Test 202  "
-	echo "yesnoquit"
-	echo "What do you want to do?"
-	echo "[y/n/q] :-"
-	bmtPromptFunc yesnoquit b_yellow
-		case $? in
-			0) echo "0 yes" ;;
-			2) echo "2 no" ;;
-			3) echo "3 quit" ;;
-			*) echo "Unknown output" ;;
-		esac
-		
-	echo " "
-	
-	#yesno 203 lowercase y,  return 0 for yes
-	echo "Test 203  "
-	echo "yesn yes"
-	echo "What do you want to do?"
-	echo "[y/N] :-"
-	bmtPromptFunc yesno yes
-	case $? in
-		0) echo "0 yes" ;;
-		2) echo "2 no" ;;
-		50) echo "50 Bad user option" ;;
-	esac
-	echo " "
-	
-	#yesno 204  lowercase n,  return 0 for no
-	echo "Test 204"
-	echo "yesno no"
-	echo "What do you want to do?"
-	echo "[Y/n] :-"
-	bmtPromptFunc yesno no
-	case $? in
-		0)  echo "0 no" ;;
-		2) echo "2 yes" ;;
-		50) echo "50 Bad user option" ;;
-	esac
-	echo " "
+	# Associate key value array' to hold expected prompt return values
+	declare -A resArr res1Arr res2Arr res3Arr res4Arr
+	local key
+
+	# yesnoquit 202
+	resArr+=( ["y"]=0 ["n"]=2 ["q"]=3) 
+	printf  "%s\n" "Test 202  :: yesnoquit"
+	for key in "${!resArr[@]}"; do
+		printf  "%s\n" "press ${key}  [y/n/q] :-" 
+		bmtPromptFunc yesnoquit b_yellow
+		bmtTestFunc "$?" "${resArr[${key}]}"  "202-${key}"
+	done
+
+	# yesno yes 203 [ y/N],  return 0 for yes
+	#  'a' here represents "any other key"
+	res1Arr+=( ["y"]=0 ["n"]=2 ["a"]=2 ) 
+	printf  "\n%s\n" "Test 203  :: yesno yes"
+	for key in "${!res1Arr[@]}"; do
+		printf  "%s\n" "press ${key}  [y/N] :-" 
+		bmtPromptFunc yesno yes
+		bmtTestFunc "$?" "${res1Arr[${key}]}"  "203-${key}"
+	done
+
+	# yesno no 204  [Y/n],  return 0 for no
+	#  'a' here represents "any other key"
+	res2Arr+=( ["y"]=2 ["n"]=0 ["a"]=2 ) 
+	printf  "\n%s\n" "Test 204  :: yesno no"
+	for key in "${!res2Arr[@]}"; do
+		printf  "%s\n" "press ${key}  [Y/n] :-" 
+		bmtPromptFunc yesno no
+		bmtTestFunc "$?" "${res2Arr[${key}]}"  "204-${key}"
+	done
 	
 	# user type catch 203 & 204
-	echo " "
-	echo "catch user type keyword for test 203 & 204"
-	bmtPromptFunc yesno foo
-	echo $?
-	echo " "
+	printf  "\n%s\n" "catch user type keyword for test 203 & 204"
+	bmtPromptFunc yesno foofoo
+	bmtTestFunc "$?" 51  "204-d"
 	
 	# anykey prompt 205
-	echo "Test 205 anykey"
+	printf  "\n%s\n" "Test 205-a  anykey test "
 	bmtPromptFunc anykey "" u_green
 	echo "my text here"
 	bmtPromptFunc anykey " and go on to next step"
 	echo "my text here"
-	echo " "
+	bmtTestFunc 1 1 "205-a" "NOAUTO"
 	
-	# quitno 206 lowercase q,  return 0 for quit
-	echo "Test 206"
-	echo "quitno quit"
-	echo "What do you want to do?"
-	echo "[q/N] :-"
-	bmtPromptFunc quitno quit
-	case $? in
-		0) echo "0 quit" ;;
-		2) echo "2 no" ;;
-		50) echo "50 Bad user option" ;;
-	esac
-	echo " "
+	# quitno quit 206 [ q/N],  return 0 for quit
+	#  'a' here represents "any other key"
+	res3Arr+=( ["q"]=0 ["n"]=2 ["a"]=2 ) 
+	printf  "\n%s\n" "Test 206  :: quitno quit"
+	for key in "${!res3Arr[@]}"; do
+		printf  "%s\n" "press ${key}  [q/N] :-" 
+		bmtPromptFunc quitno quit
+		bmtTestFunc "$?" "${res3Arr[${key}]}"  "206-${key}"
+	done
 	
-	#quitno 207  lowercase n,  return 0 for no
-	echo "Test 207"
-	echo "quitno no"
-	echo "What do you want to do?"
-	echo "[Q/n] :-"
-	bmtPromptFunc quitno no
-	case $? in
-		0) echo "0 no" ;;
-		2) echo "2 quit" ;;
-		50) echo "50 Bad user option" ;;
-	esac
-	echo " "
-		
+	#quitno no 207  [Q/n] :  return 0 for no
+	#  'a' here represents "any other key"
+	res4Arr+=( ["q"]=2 ["n"]=0 ["a"]=2 ) 
+	printf  "\n%s\n" "Test 207  :: quitno no"
+	for key in "${!res4Arr[@]}"; do
+		printf  "%s\n" "press ${key}  [Q/n] :-" 
+		bmtPromptFunc quitno no
+		bmtTestFunc "$?" "${res4Arr[${key}]}"  "207-${key}"
+	done
+	
+	# user type catch 206 & 207
+	printf  "\n%s\n" "Catch user type keyword for test 206 & 207"
+	bmtPromptFunc quitno foofoo
+	bmtTestFunc "$?" 51  "207-d"
 	
 	#208 
-	echo "Test 208"
-	bmtPromptFunc wishtocontinue "Do you wish to contine?" b_yellow
-	#bmtPromptFunc wishtocontinue "Do you wish to contine?" 
-	echo "Continued "
-	echo " "
+	printf  "\n%s\n"  "Test 208"
+	bmtPromptFunc wishtocontinue "Do you wish to continue?" b_yellow
+	bmtTestFunc "$?" 0  "208-a"
+	printf  "\n%s\n"  "Continued "
 	
 	#209
-	echo "Test 209 center text"
+	printf  "\n%s\n" "Test 209 center text"
 	bmtPromptFunc centertext "Hello World." 
-	echo 
+	bmtTestFunc 1 1 "209-a" "NOAUTO"
 	
 	#210
-	echo "Test 210 event status"
+	printf  "\n%s\n" "Test 210 event status"
 	bmtPromptFunc eventstatus "Installing bashMultiTool" "OK" b_green
 	bmtPromptFunc eventstatus "File upload" "Fail" b_red
 	bmtPromptFunc eventstatus "File upload" "Pending" 
-	echo
+	bmtTestFunc 1 1 "210-a" "NOAUTO"
 	
 }
 

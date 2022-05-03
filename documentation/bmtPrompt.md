@@ -49,7 +49,7 @@ bmtPromptFunc yesno yes
 ```
 Returns 0 for yes , 2 for no , 50 for bad user option
 
-204) Yes-no prompt [Y/n] where no is default
+204) Yes-no prompt [Y/n] where yes is default
 
 Keyword is yesno , returns codes based on user input
 second option is no 

@@ -100,6 +100,7 @@ A script to print library meta data is also installed.
 |  bmtData | btmDataFunc | 601-607 | Data related | [bmtData help file](documentation/bmtData.md)|
 |  bmtTime | btmTimeFunc | 701-709 | Time related | [bmtTime help file](documentation/bmtTime.md)|
 |  bmtMisc  | bmtMiscFunc  | 801-804 | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
+|  bmtTest  | bmtTestFunc  | 901 |  Test the library | [bmtTest help file](documentation/bmtTest.md)|
 
 The library contains eight section's, Each section has one file with one function. 
 Which contains 50 sub-sections in total.
@@ -116,3 +117,7 @@ Example
 Output of basic example file in example folder, showing basic usage.
 
 ![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/example.png)
+
+Output report of test section.
+
+![ScreenShot](https://raw.githubusercontent.com/gavinlyonsrepo/bashmultitool/master/documentation/screenshot/test.png)
