@@ -75,12 +75,12 @@ case "$1" in
 		local i
 		local count
 		local percent
-		count=0
+		count=1
 		
 		[ -z "$2" ] && return 2
 		
 		while true; do
-			for ((k = 0; k <= 25 ; k++))
+			for ((k = 1; k <= 25 ; k++))
 			do
 				echo -n "["
 				for ((i = 0 ; i <= k; i++)); do echo -n "##"; done
@@ -92,6 +92,7 @@ case "$1" in
 			done
 			count=$((count + 1))
 		done
+		
 	;;
 	
 	dateformat)
@@ -101,6 +102,18 @@ case "$1" in
 		formatstr="${3:-"%F %T"}"
 		output="$(date -d "@${timestamp}" +"${formatstr}")" || return 3
 		printf "%s" "${output}"
+	;;
+	
+	spintwo) # 710 spinner two
+		local spinner=("|" "/"  "-"  "\\"  "\\");
+		while true; do
+			for i in "${spinner[@]}";
+			do
+				# no new line , \r reset line
+				echo -ne "\r$i";
+				sleep 0.2;
+			done;
+		done
 	;;
 	
 	*) # Catch all users typos

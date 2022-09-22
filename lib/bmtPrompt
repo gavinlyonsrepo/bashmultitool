@@ -69,7 +69,7 @@ case "$1" in
 		elif [ "$2" = no ]; then
 			choiceVar="nN"
 		else
-			bmtPrintFunc red "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
+			bmtPrintFunc norm "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
 			return 51
 		fi
 
@@ -91,7 +91,7 @@ case "$1" in
 		elif [ "$2" = no ]; then
 			choiceVar="nN"
 		else
-			bmtPrintFunc red "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
+			bmtPrintFunc norm "Error: Unknown Option to keyword yesno: bashmultitool, bmtPrompt, bmtPromptFunc"
 			return 51
 		fi
 
@@ -161,7 +161,7 @@ case "$1" in
 	;;
 	
 	*) # Catch all users typos
-		bmtPrintFunc red "Error: Unknown keyword : bashMultiTool: bmtPrompt : bmtPromptFunc"
+		bmtPrintFunc norm "Error: Unknown keyword : bashMultiTool: bmtPrompt : bmtPromptFunc"
 		return 255
 	;;
 

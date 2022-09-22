@@ -1,15 +1,16 @@
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtTime  | bmtTimeFunc  | 701-709  | Timing related | bmtTime.md |
+|  bmtTime  | bmtTimeFunc  | 701-710  | Timing related | bmtTime.md |
 
 **Section Seven, Time**
 
 * 701 Convert time to  epoch time 
 * 702 Print current time Stamp
-* 703 Spinner Animation for long non-verbose commands
+* 703 Spinner Animation multiple character for long non-verbose commands
 * 704 - 707 Stopwatch / timer
 * 708 Progress Bar
 * 709 Convert Epoch time to date format
+* 710 Spinner Animation single character for long non-verbose commands
 
 **Sub-Sections**
 
@@ -25,7 +26,7 @@ bmtTimeFunc epochconvert "2022-04-27 19:42:01 "
 bmtTimeFunc epochnow
 ```
 
-703) Animation for non-verbose process/commands that take long time
+703) Spinner Animation for non-verbose process/commands that take long time
 
 ```sh
 	# call spinner section put run in background and save PID
@@ -71,7 +72,7 @@ percentage completed.
 	pid=$!
 	disown
 	echo "START"
-	sleep 25 #do stuff
+	sleep 25 # do stuff 25 seconds for one progress bar complete pass
 	echo " "
 	echo "END"
 	# Stop spin function with PID
@@ -85,4 +86,20 @@ percentage completed.
 ```sh
 bmtTimeFunc dateformat "1651084921" "%FT%T%z"
 # prints ~ 2022-04-27T19:42:01+0100
+```
+
+710) Spinner Animation, number  two for long non-verbose commands
+
+```sh
+	# call spinner section put run in background and save PID
+	bmtTimeFunc  spintwo &
+	pid=$!
+	disown
+	
+	# 'do stuff'
+	find ~ -name mint 2>/dev/null 
+	
+	# Stop spintwo function with PID
+	kill $pid 
+	sleep 2
 ```

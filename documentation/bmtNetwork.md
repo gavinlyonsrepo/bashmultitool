@@ -13,8 +13,15 @@
 
 Keyword checknet, first option url of website. Returns 0 for connectivity , 2 for no connectivity 
 
+1. Param1 The URL 
+2. Param2 NOMES(optional) can be used to surpress verbose output.
+
 ```sh
 bmtNetworkFunc checknet "www.google.ie"
+```
+
+```sh
+bmtNetworkFunc checknet "www.google.ie" "NOMES"
 ```
 
 302) weather

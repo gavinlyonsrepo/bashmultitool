@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtMisc  | bmtMiscFunc  | 801-804  | Miscellaneous | bmtMisc.md |
+|  bmtMisc  | bmtMiscFunc  | 801-806  | Miscellaneous | bmtMisc.md |
 
 
 **Section Eight , misc**
@@ -9,6 +9,8 @@
 * 802 Get laptop battery level
 * 803 Create a multi-line box with text inside it 
 * 804 Create a single line box with variable box character. 
+* 805 Centered text with variable banner character
+* 806 Display gauge
 
 **Sub-Sections**
 
@@ -48,4 +50,25 @@ bmtMiscFunc drawbox 1 2 'first line' 'second line' 'third line'
 
 ```sh
 bmtMiscFunc title 2 6 '#' 'hello'
+```
+
+805) Centered text with option  banner filler
+1. Param1 Text to center
+2. Param2 Banner symbol 
+
+```sh
+bmtMiscFunc centertext "Hello World" =
+```
+
+806) Display Gauge, display a gauge bar showing variable value
+
+1. Param1 Text label
+2. Param2 Value to display
+3. Param3 Minimum value of gauge
+4. Param4 Maximum value of gauge
+5. Param5 Gauge full symbol
+6. Param6  Gauge empty symbol
+
+```sh
+bmtMiscFunc gauge  "Volts" 25 1 50 "#" "."
 ```

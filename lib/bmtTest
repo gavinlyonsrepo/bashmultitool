@@ -17,6 +17,7 @@ local TestFile="test"
 
 case "$3" in
 	START)  # Start message
+			printf "%s\n" "=== Start Automatic Tests === "
 			bmtPrintFunc norm "Delete log file if exists"
 			rm -iv "$urlTestDir""$TestFile.log" 
 			bmtLinuxFunc log "NOTICE" "Run Start"  "$TestFile" "$urlTestDir" ;;

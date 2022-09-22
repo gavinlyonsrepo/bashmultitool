@@ -23,11 +23,17 @@ case "$1" in
 			#scanning]) with a quick timeout
 			#(-w 1 waits at most one second
 			#It checks passed website $1 on port 80 (HTTP).
-		if nc -zw1 "$2" 80; then
-			printf '%s\n' "We have connectivity $2"
+		if  nc -zw1 "$2" 80 2>>/tmp/bmtchecknet.log ; then
+			if [ "$3" != "NOMES" ] 
+			then 
+				printf '%s\n' "We have connectivity $2"
+			fi
 			return 0
 		else
-			printf '%s\n' "${red}We do not have connectivity $2 ${normal}"
+			if [ "$3" != "NOMES" ]
+			then
+				printf '%s\n' "${red}We do not have connectivity $2 ${normal}"
+			fi
 			return 2
 		fi
 	;;

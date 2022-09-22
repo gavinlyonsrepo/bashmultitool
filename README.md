@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/whitelight976)
+
 Overview
 --------------------------------------------
 * Name: bashMultiTool
@@ -43,13 +45,13 @@ Package available in the Arch Linux user repo AUR
 **For other linux systems**
 
 Download latest fixed release and run the makefile as per 
-terminal commands below for version 2.0 latest release at time of writing
+terminal commands below for version 2.1 latest release at time of writing
 Note: If you install with this method you will not be informed of updates 
 by system.
 
 ```sh
-curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/2.0.tar.gz | tar xz
-cd  bashmultitool-2.0
+curl -sL https://github.com/gavinlyonsrepo/bashmultitool/archive/2.1.tar.gz | tar xz
+cd  bashmultitool-2.1
 sudo make install
 ```
 
@@ -96,14 +98,14 @@ A script to print library meta data is also installed.
 |  bmtPrompt | bmtPromptFunc | 201-210 | Prompts | [ bmtPrompt help file](documentation/bmtPrompt.md)|
 |  bmtNetwork  | bmtNetworkFunc  | 301-302 | Network related | [bmtNetwork help file](documentation/bmtNetwork.md)|
 |  bmtLinux | bmtLinuxFunc | 401-408 | Linux related | [bmtLinux help file](documentation/bmtLinux.md)|
-|  bmtFiles | bmtFilesFunc | 501-509 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
+|  bmtFiles | bmtFilesFunc | 501-510 | File related | [bmtFiles help file](documentation/bmtFiles.md)|
 |  bmtData | btmDataFunc | 601-607 | Data related | [bmtData help file](documentation/bmtData.md)|
-|  bmtTime | btmTimeFunc | 701-709 | Time related | [bmtTime help file](documentation/bmtTime.md)|
-|  bmtMisc  | bmtMiscFunc  | 801-804 | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
-|  bmtTest  | bmtTestFunc  | 901 |  library testing | [bmtTest help file](documentation/bmtTest.md)|
+|  bmtTime | btmTimeFunc | 701-710 | Time related | [bmtTime help file](documentation/bmtTime.md)|
+|  bmtMisc  | bmtMiscFunc  | 801-806 | Miscellaneous | [bmtMisc help file](documentation/bmtMisc.md)|
+|  bmtTest  | bmtTestFunc  | 901 |  internal library test | [bmtTest help file](documentation/bmtTest.md)|
 
 The library contains eight section's, Each section has one file with one function. 
-Which contains 50 sub-sections in total.
+Which contains 54 sub-sections in total.
 The sections are grouped per logical function.
 Printing, prompting, Linux related, file related, 
 data related, time related , network related and miscellaneous.
@@ -111,7 +113,7 @@ The sections are mostly independent of each other
 you can source them individually if you wish, however the prompt file *is* 
 dependent on print. There is also  a ninth test section bmtTest used to test library.
 
-The repo also contains a *test folder* where test files used in development are available, one for each library file. There is also a testTest.sh which runs an semi-automated test on entire library and produces a report.
+The repo also contains a *test folder* where a test file used in development are available, one function for each library file. The test file "testTest.sh", runs an semi-automated test on entire library and produces a report.  Pass the test file a number between 1-9 , 1-8 correspond to the sections, 9 will test entire library. 
 
 Example
 ----------------------------

@@ -112,10 +112,43 @@ case "$1" in
 	printf "%s" "${mime_output}"
 	;;
 	
+	filename) #510 /tmp/text.txt
+	[ -z "$2" ] && return 2
+	case "$3" in
+		1) #510-1 full filename  text.txt
+			printf "%s" "${2##*/}" #  parameter expansion retain after /
+		  ;;
+		2) #510-2 basename text 
+			local filename basename
+			filename="${2##*/}" #  parameter expansion retain after /
+			basename="${filename%.*}" # parameter expansion retain before .
+			printf "%s" "${basename}"
+		  ;;
+		3) #510.3 extension .txt
+			local filename extension
+			filename="${2##*/}" #  parameter expansion retain after /
+			extension="${filename##*.}" # parameter expansion after .
+			[[ "${filename}" = "${extension}" ]] && return 4
+
+			printf "%s" "${extension}"
+		  ;;
+		4) #folder path /tmp
+			declare folderpath=${2:-.}
+			folderpath=${2%/*} 
+			printf "%s" "${folderpath}"
+		  ;;
+		*)
+			return 3
+		;;
+	esac
+	return 0
+	;;
+	
 	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtFiles : bmtFilesFunc"
 		return 255
 	;;
+
 esac
 
 }

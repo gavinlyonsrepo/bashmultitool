@@ -1,6 +1,6 @@
 | Library file | Function | Sections | Content | help file|
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtFiles | bmtFilesFunc | 501-509 | File related | bmtFiles.md |
+|  bmtFiles | bmtFilesFunc | 501-510 | File related | bmtFiles.md |
 
 **Section Five,  File**
 
@@ -13,6 +13,7 @@
 * 507 File size 
 * 508 File size in bytes
 * 509 mime  type exists?
+* 510 File name extraction
 
 **Sub-Sections**
 
@@ -91,4 +92,14 @@ Returns 4 If file/directory does not exist. , 3 If file or mimetype command not 
 ```sh
 bmtFilesFunc getmimetype "$TESTOBJECTS/full.txt" >> /tmp/mytempfile123.txt
 echo $?
+```
+510) File name extraction
+Returns 0 for success, 2 for missing arguments , 3 for wrong 2nd argument value, 4 for missing file extension
+
+1. Param1 Filepath
+2. Param2 1-4 1 for filename, 2 for basename, 3 for extension ,4 for folder path
+
+```sh
+bmtFilesFunc filename "/foo/foo123/tv.png" 4 
+echo  " :: Folder name $?"
 ```

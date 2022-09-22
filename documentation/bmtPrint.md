@@ -11,6 +11,9 @@ Colours: Black, Red, Green, Yellow, Blue, Purple, Cyan, White.
 Modes: normal, bold, underline, background, high intensity,
 bold high intensity, background high intensity.  
 
+1. Param1 mode
+2. Param2 text to print(optional can be left out just to change cursor colour 
+for next objects or text printed ) 
 
 **Sub-Sections**
 

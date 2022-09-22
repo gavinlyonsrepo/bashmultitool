@@ -15,13 +15,15 @@ case "$1" in
 
 	password) #801
 		local mylengthVar=0
+		echo "Random Password generator :"
 		if [ -z "$2" ]; then
 			cd "/tmp/"  || return 3
+			echo "Output Path /tmp/"
 		else
 			cd "$2"  || return 3
+			echo "Output Path $2"
 		fi
 		touch passwordBMT.txt
-		echo "Random Password generator"
 		echo "Enter length:-"
 		read -r mylengthVar
 		# if just enter pressed set default 20
@@ -42,10 +44,10 @@ case "$1" in
 		local Filepath="/sys/class/power_supply/$2/capacity"
 		if ! [[ -f $Filepath ]]; then
 			echo "File '$Filepath' not found."
-			return 101
-		elif ! [[ -f $Filepath ]]; then
+			return 127
+		elif ! [[ -r $Filepath ]]; then
 			echo "File '$Filepath' unreadable."
-			return 102
+			return 128
 		fi
 
 		read -r < "/sys/class/power_supply/$2/capacity"
@@ -92,6 +94,7 @@ case "$1" in
 		local colortext="$3"
 		local bannersymbol="$4"
 		local textmsg="$5"
+		local edge
 		
 		edge=$(echo "$textmsg####" | sed "s/./$bannersymbol/g")
 		
@@ -103,6 +106,40 @@ case "$1" in
 		
 	;;
 	
+	centertext)
+		local banner outputtext
+		local inputtext=" ${2} " bannersymbol="${3:- }" 
+		local stringlength=${#inputtext}
+		local bannerlength="$((($(tput cols) - stringlength) / 2))"
+		
+		[[ -n "${bannersymbol}" ]] && bannersymbol="${bannersymbol:0:1}"
+		for ((i = 0; i < bannerlength; i++)); do
+			banner+="${bannersymbol}"
+		done
+
+		outputtext="${banner}${inputtext}${banner}"
+		[[ $((($(tput cols) - stringlength) % 2)) -ne 0 ]] && outputtext+="${bannersymbol}"
+		printf "%s" "${outputtext}"
+	;;
+
+	gauge)
+		local label="$2"
+		local value="$3"
+		local min="$4"
+		local max="$5"
+		local symbol="$6"
+		local symbolempty="$7"
+		
+		printf "%s=%3d %d" "$label" "$value" "$min" 
+		echo -n "["
+		for ((i = min ; i <= value; i++)); do echo -n "$symbol"; done
+		for ((j = value+1 ; j <= max ; j++)); do echo -n "$symbolempty"; done
+		echo -n "]"
+		printf "%d" "$max" 
+		echo
+	;;
+ 
+			
 	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtMisc: bmtMiscFunc"
 		return 255
