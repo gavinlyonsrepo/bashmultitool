@@ -90,14 +90,14 @@ A script to print library meta data is also installed.
 | bmtTest | bmtDrawFunc | 901-907 | Draw related | [bmtDraw help file](documentation/bmtDraw.md) |
 | bmtTest | bmtTestFunc | 1001 | internal library test | [bmtTest help file](documentation/bmtTest.md) |
 
-The library contains eight section's, Each section has one file with one function.
+The library contains nine section's, Each section has one file with one function.
 Which contains 70 sub-sections in total.
 The sections are grouped per logical function.
 Printing, prompting, Linux related, file related,
-data related, time related , draw related, network related and miscellaneous.
+data related, time related, draw related, network related and miscellaneous.
 The sections are mostly independent of each other
 you can source them individually if you wish, however the prompt file *is*
-dependent on print. There is also a  test section bmtTest used to test library.
+dependent on print. There is also a test section bmtTest used to test library.
 
 ## Example
 

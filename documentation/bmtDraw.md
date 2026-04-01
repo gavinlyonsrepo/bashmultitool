@@ -2,7 +2,7 @@
 
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-| bmtDraw | bmtDrawFunc | 901-904 | Draw related | bmtDraw.md |
+| bmtDraw | bmtDrawFunc | 901-907 | Draw related | bmtDraw.md |
 
 ## Section Nine, draw sub sections
 
@@ -10,6 +10,9 @@
 * 902 Create a single line box with variable box character.
 * 903 Centered text with variable banner character
 * 904 Display gauge
+* 905 Table
+* 906 Menu
+* 907 Columns
 
 ### 901 Create a multi-line box with text inside it
 
@@ -54,7 +57,7 @@ bmtDrawFunc centertext "Hello World" =
 bmtDrawFunc gauge  "Volts" 25 1 50 "#" "."
 ```
 
-### 906 table
+### 905 table
 
 1. Param $2 colour for the border/keys (tput colour number).
 2. Param $3 colour for the values (tput colour number).

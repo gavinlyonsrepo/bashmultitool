@@ -2,7 +2,7 @@
 
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-| bmtData | btmDataFunc | 601-607 | Data related | bmtData.md |
+| bmtData | btmDataFunc | 601-610 | Data related | bmtData.md |
 
 ## Data section 601-610
 
