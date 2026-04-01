@@ -60,6 +60,48 @@ case "$1" in
 		return "$(printf "%s\\n" "${#2}")"
 	;;
 
+	contains) # 608 check if a string contains a substring
+		# Param $2: the string to search in.
+		# Param $3: the substring to search for.
+		# Returns 0 if found, 2 if not found (via default at end of function).
+		# Returns 1 if either param is missing.
+		if [ -z "$2" ] || [ -z "$3" ] ; then
+			return 1
+		fi
+		if [[ "$2" == *"$3"* ]] ; then
+			return 0
+		fi
+	;;
+
+	strreplace) # 609 replace occurrences of a pattern in a string
+		# Param $2: the original string.
+		# Param $3: the pattern to replace.
+		# Param $4: the replacement string.
+		# Param $5: ALL (optional) replace every occurrence; default replaces first only.
+		# Result is echoed for capture: result=$(bmtDataFunc strreplace "str" "old" "new")
+		# Returns 1 if Param $2 or Param $3 is missing.
+		if [ -z "$2" ] || [ -z "$3" ] ; then
+			return 1
+		fi
+		if [ "$5" = "ALL" ] ; then
+			echo "${2//"$3"/"$4"}"
+		else
+			echo "${2/"$3"/"$4"}"
+		fi
+		return 0
+	;;
+
+	strrev) # 610 reverse a string
+		# Param $2: the string to reverse.
+		# Result is echoed for capture: result=$(bmtDataFunc strrev "hello")
+		# Returns 1 if Param $2 is missing.
+		if [ -z "$2" ] ; then
+			return 1
+		fi
+		echo "$2" | rev
+		return 0
+	;;
+
 	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtData : bmtDataFunc"
 		return 255

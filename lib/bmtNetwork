@@ -17,12 +17,14 @@ normal=$(printf "\033[0m")
 
 case "$1" in
 
-	checknet) #  301 heck if website up
+	checknet) #  301 check if website up
 			#This uses netcat (nc) in its port scan mode,
 			#a quick poke (-z is zero-I/O mode [used for
 			#scanning]) with a quick timeout
 			#(-w 1 waits at most one second
 			#It checks passed website $1 on port 80 (HTTP).
+			# Param $2: hostname of IP to check
+			# Param $3: NOMES (optional) suppress output, result still returned via return code.
 		if  nc -zw1 "$2" 80 2>>/tmp/bmtchecknet.log ; then
 			if [ "$3" != "NOMES" ] 
 			then 
@@ -38,11 +40,201 @@ case "$1" in
 		fi
 	;;
 	
-	weather) 	# 302
+	weather) 	# 302 weather for a city
+		# Uses wttr.in which provides a simple HTTP API for weather info.
+		# Param $2: city name (e.g. "London" or "New York
+		# Param $3: format string for wttr.in (optional, defaults to "%l:+%c+%t" for location, condition, and temperature).
 		local mycityVar="$2"
 		local myformat="$3"
 		wget -qO - wttr.in/"$mycityVar"?format="$myformat"
 		;;
+
+	publicip) # 303 get public/external IP address
+		# Uses curl to query a plain-text IP echo service.
+		# Param $2: NOMES (optional) suppress output, result still returned via echo.
+		local myip
+		myip=$(curl -s --max-time 5 icanhazip.com 2>/dev/null)
+		if [ -z "$myip" ] ; then
+			if [ "$2" != "NOMES" ] ; then
+				printf '%s\n' "${red}Error: could not retrieve public IP${normal}"
+			fi
+			return 2
+		fi
+		if [ "$2" != "NOMES" ] ; then
+			printf '%s\n' "$myip"
+		else
+			echo "$myip"
+		fi
+		return 0
+	;;
+
+	localip) # 304 get local IP of a network interface
+		# Param $2: interface name (optional, defaults to first non-loopback interface).
+		# Param $3: NOMES (optional) suppress output, result echoed for capture.
+		local myiface myip
+		if [ -n "$2" ] && [ "$2" != "NOMES" ] ; then
+			myiface="$2"
+		else
+			myiface=$(ip -4 addr show up | awk '/^[0-9]+:/{iface=$2; gsub(/:$/,"",iface)} /inet /{if(iface!="lo"){print iface; exit}}')
+		fi
+		myip=$(ip -4 addr show "$myiface" 2>/dev/null | awk '/inet /{print $2}' | cut -d/ -f1 | head -1)
+		if [ -z "$myip" ] ; then
+			if [ "$3" != "NOMES" ] && [ "$2" != "NOMES" ] ; then
+				printf '%s\n' "${red}Error: no IP found for interface ${myiface}${normal}"
+			fi
+			return 2
+		fi
+		if [ "$3" == "NOMES" ] || [ "$2" == "NOMES" ] ; then
+			echo "$myip"
+		else
+			printf '%s\n' "$myiface : $myip"
+		fi
+		return 0
+	;;
+
+	dnslookup) # 305 resolve a hostname to IP address(es)
+		# Uses the 'host' utility which is part of bind-utils / dnsutils.
+		# Param $2: hostname or IP to look up.
+		# Param $3: NOMES (optional) suppress output, raw result echoed for capture.
+		local myresult
+		if [ -z "$2" ] ; then
+			printf '%s\n' "${red}Error: no hostname supplied${normal}"
+			return 2
+		fi
+		if ! myresult=$(host "$2" 2>/dev/null) || [ -z "$myresult" ] ; then
+			if [ "$3" != "NOMES" ] ; then
+				printf '%s\n' "${red}Error: DNS lookup failed for $2${normal}"
+			fi
+			return 2
+		fi
+		if [ "$3" != "NOMES" ] ; then
+			printf '%s\n' "$myresult"
+		else
+			echo "$myresult"
+		fi
+		return 0
+	;;
+
+	portcheck) # 306 check if a TCP port is open on a host
+		# Uses netcat zero-I/O mode with a 3 second timeout.
+		# Param2: hostname or IP.
+		# Param3: port number.
+		# Param4: NOMES (optional) suppress output.
+		if [ -z "$2" ] || [ -z "$3" ] ; then
+			printf '%s\n' "${red}Error: usage: bmtNetworkFunc portcheck <host> <port> [NOMES]${normal}"
+			return 2
+		fi
+		if nc -zw3 "$2" "$3" 2>/dev/null ; then
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "Port $3 is open on $2"
+			fi
+			return 0
+		else
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "${red}Port $3 is closed or unreachable on $2${normal}"
+			fi
+			return 2
+		fi
+	;;
+
+	pingh) # 307 ping a host, returns 0 for success, 2 for failure
+		# Param2: hostname or IP.
+		# Param3: number of ping attempts (optional, default 4).
+		# Param4: NOMES (optional) suppress output.
+		if [ -z "$2" ] ; then
+			printf '%s\n' "${red}Error: no hostname supplied${normal}"
+			return 2
+		fi
+		local mycount="${3:-4}"
+		if ping -c "$mycount" -q "$2" 2>/dev/null ; then
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "Host $2 is reachable"
+			fi
+			return 0
+		else
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "${red}Host $2 is unreachable${normal}"
+			fi
+			return 2
+		fi
+	;;
+
+	download) # 308 download a file to a destination path
+		# Uses wget; falls back to curl if wget is not available.
+		# Param $2: URL to download.
+		# Param $3: destination directory or file path (optional, defaults to current dir).
+		# Param $4: NOMES (optional) suppress progress output.
+		if [ -z "$2" ] ; then
+			printf '%s\n' "${red}Error: no URL supplied${normal}"
+			return 2
+		fi
+		local mydest="${3:-.}"
+		local myquiet=""
+		local mydownload_rc=0
+		[ "$4" == "NOMES" ] && myquiet="-q"
+		if command -v wget &>/dev/null ; then
+			wget $myquiet -P "$mydest" "$2" 2>/dev/null || mydownload_rc=$?
+		elif command -v curl &>/dev/null ; then
+			[ -n "$myquiet" ] && myquiet="-s"
+			curl $myquiet -L -o "$mydest/$(basename "$2")" "$2" 2>/dev/null || mydownload_rc=$?
+		else
+			printf '%s\n' "${red}Error: neither wget nor curl found${normal}"
+			return 2
+		fi
+		if [ "$mydownload_rc" -ne 0 ] ; then
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "${red}Error: download failed for $2${normal}"
+			fi
+			return 2
+		fi
+		if [ "$4" != "NOMES" ] ; then
+			printf '%s\n' "Downloaded $2 to $mydest"
+		fi
+		return 0
+	;;
+
+	netif) # 309 list active network interfaces and their IPv4 addresses
+		# Param2: NOMES (optional) suppress headers, output raw lines for parsing.
+		if [ "$2" != "NOMES" ] ; then
+			printf '%-20s %s\n' "INTERFACE" "ADDRESS"
+			printf '%-20s %s\n' "---------" "-------"
+		fi
+		ip -4 addr show up 2>/dev/null \
+			| awk '/^[0-9]+:/{iface=$2; gsub(/:$/,"",iface)} \
+			       /inet /{print iface, $2}' \
+			| while read -r iface addr ; do
+				[ "$iface" = "lo" ] && continue
+				if [ "$2" != "NOMES" ] ; then
+					printf '%-20s %s\n' "$iface" "$addr"
+				else
+					echo "$iface $addr"
+				fi
+			done
+		return 0
+	;;
+
+	sshcheck) # 310 check if SSH port is reachable on a host
+		# Param2: hostname or IP.
+		# Param3: port number (optional, default 22).
+		# Param4: NOMES (optional) suppress output.
+		if [ -z "$2" ] ; then
+			printf '%s\n' "${red}Error: no hostname supplied${normal}"
+			return 2
+		fi
+		local mysshport="${3:-22}"
+		if nc -zw3 "$2" "$mysshport" 2>/dev/null ; then
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "SSH port $mysshport is open on $2"
+			fi
+			return 0
+		else
+			if [ "$4" != "NOMES" ] ; then
+				printf '%s\n' "${red}SSH port $mysshport is closed or unreachable on $2${normal}"
+			fi
+			return 2
+		fi
+	;;
+
 	
 	*) # Catch all users typos
 		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtNetwork: bmtNetworkFunc"

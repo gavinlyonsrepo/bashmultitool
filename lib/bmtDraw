@@ -1,0 +1,215 @@
+#!/bin/bash
+# === HEADER ===
+#FileName: bmtDraw
+#Function: Contains Draw utilities.
+#library name: bashmultitool
+#Written: Gavin Lyons
+#URL: https://github.com/gavinlyonsrepo/BashMultiTool
+
+# ===FUNCTIONS ===
+
+function bmtDrawFunc
+{
+
+case "$1" in
+
+	drawbox) # 901
+		local width
+		local place
+		local textarray=("$@") 
+		local colorbox="$2"
+		local colortext="$3"
+		local inputparam
+		
+		# remove color's and subsection name from array
+		for inputparam in 0 1 2 
+		do
+			unset "textarray[$inputparam]"
+		done
+			
+		#${s[@]} – all elements of array s; ((width<${#l})) – ((..)) shell arithmetic testing 
+		#whether variable width's value is less than variable l value's length, obtained
+		#with parameter expansion (# – string length); ${place//?/-} – parameter expansion  
+		#replacing all occurrences of any character with a “-” (// – replace all; ? – 
+		#wildcard meaning any character). 
+		for word in "${textarray[@]}"; do
+			((width<${#word})) && { place="$word"; width="${#word}"; }
+		done
+		tput setaf "$colorbox"
+		echo -e " -${place//?/-}-\n| ${place//?/ } |"
+		for word in "${textarray[@]}"; do
+			printf '| %s%*s%s |\n' "$(tput setaf "$colortext")" "-$width" "$word" "$(tput setaf "$colorbox")"
+		done
+		echo -e "| ${place//?/ } |\n -${place//?/-}-"
+		tput sgr 0
+	;;
+	
+	title) # 902
+		local colorbox="$2"
+		local colortext="$3"
+		local bannersymbol="$4"
+		local textmsg="$5"
+		local edge
+		
+		edge=$(echo "$textmsg####" | sed "s/./$bannersymbol/g")
+		
+		tput setaf "$colorbox"
+		printf '%s\n' "$edge"
+		printf '%s%s%s%s%s\n' "$bannersymbol " "$(tput setaf "$colortext")" "$textmsg" "$(tput setaf "$colorbox")" " $bannersymbol"
+		printf '%s\n' "$edge"
+		tput sgr 0
+		
+	;;
+	
+	centertext) # 903
+		local banner outputtext
+		local inputtext=" ${2} " bannersymbol="${3:- }" 
+		local stringlength=${#inputtext}
+		local bannerlength="$((($(tput cols) - stringlength) / 2))"
+		
+		[[ -n "${bannersymbol}" ]] && bannersymbol="${bannersymbol:0:1}"
+		for ((i = 0; i < bannerlength; i++)); do
+			banner+="${bannersymbol}"
+		done
+
+		outputtext="${banner}${inputtext}${banner}"
+		[[ $((($(tput cols) - stringlength) % 2)) -ne 0 ]] && outputtext+="${bannersymbol}"
+		printf "%s" "${outputtext}"
+	;;
+
+	gauge) # 904
+		local label="$2"
+		local value="$3"
+		local min="$4"
+		local max="$5"
+		local symbol="$6"
+		local symbolempty="$7"
+		
+		printf "%s=%3d %d" "$label" "$value" "$min" 
+		echo -n "["
+		for ((i = min ; i <= value; i++)); do echo -n "$symbol"; done
+		for ((j = value+1 ; j <= max ; j++)); do echo -n "$symbolempty"; done
+		echo -n "]"
+		printf "%d" "$max" 
+		echo
+	;;
+ 
+	table) # 905 render a two-column key/value table
+		# Param $2: colour for the border/keys (tput colour number).
+		# Param $3: colour for the values (tput colour number).
+		# Param $4+: alternating key value pairs e.g. "OS" "Linux" "Uptime" "3 days"
+		# Odd-numbered trailing param with no value partner is printed with empty value.
+		local colorkey="$2"
+		local colorval="$3"
+		shift 3
+		local pairs=("$@")
+		local i
+		local keywidth=0
+		# find longest key for alignment
+		for ((i = 0; i < ${#pairs[@]}; i += 2)); do
+			(( ${#pairs[i]} > keywidth )) && keywidth=${#pairs[i]}
+		done
+		local divider
+		divider=$(printf '%*s' "$((keywidth + 24))" '' | tr ' ' '-')
+		tput setaf "$colorkey"
+		printf '%s\n' "$divider"
+		for ((i = 0; i < ${#pairs[@]}; i += 2)); do
+			local key="${pairs[i]}"
+			local val="${pairs[i+1]:-}"
+			printf '| %s%-*s%s : %s%-20s%s |\n' \
+				"$(tput setaf "$colorkey")" "$keywidth" "$key" \
+				"$(tput setaf "$colorkey")" \
+				"$(tput setaf "$colorval")" "$val" \
+				"$(tput setaf "$colorkey")"
+		done
+		printf '%s\n' "$divider"
+		tput sgr 0
+		return 0
+	;;
+
+	menu) # 906 numbered selection menu
+		# Param $2: colour for the menu border and numbers (tput colour number).
+		# Param $3: colour for the menu item text (tput colour number).
+		# Param $4: prompt string shown to user below the list.
+		# Param $5+: menu item strings, one per argument.
+		# Prints the numbered list, reads user input.
+		# Returns the chosen number (1-based) as the exit code.
+		# Returns 253 if input is not an integer, 254 if out of range.
+		local colorborder="$2"
+		local coloritem="$3"
+		local prompt="$4"
+		shift 4
+		local items=("$@")
+		local count=${#items[@]}
+		local i
+		local divider
+		divider=$(printf '%*s' 30 '' | tr ' ' '-')
+		tput setaf "$colorborder"
+		printf '%s\n' "$divider"
+		for ((i = 0; i < count; i++)); do
+			printf '%s%d%s) %s%s%s\n' \
+				"$(tput setaf "$colorborder")" "$((i + 1))" \
+				"$(tput setaf "$colorborder")" \
+				"$(tput setaf "$coloritem")" "${items[i]}" \
+				"$(tput setaf "$colorborder")"
+		done
+		printf '%s\n' "$divider"
+		tput sgr 0
+		printf '%s ' "$prompt"
+		local choice
+		read -r choice
+		# validate integer
+		if [[ "$choice" == *[!0-9]* ]] || [ -z "$choice" ]; then
+			printf '%s\n' "Error: invalid input -- bmtDraw: menu"
+			return 253
+		fi
+		# validate range
+		if (( choice < 1 || choice > count )); then
+			printf '%s\n' "Error: out of range -- bmtDraw: menu"
+			return 254
+		fi
+		return "$choice"
+	;;
+
+	cols) # 907 display a list of items across N evenly-spaced columns
+		# Param $2: number of columns.
+		# Param $3: colour for the items (tput colour number).
+		# Param $4+: items to display.
+		# Column width is calculated from the longest item, fitted to terminal width.
+		# Returns 2 if column count is missing or not a positive integer.
+		local numcols="$2"
+		local coloritem="$3"
+		shift 3
+		local items=("$@")
+		if [[ -z "$numcols" || "$numcols" == *[!0-9]* || "$numcols" -lt 1 ]]; then
+			printf '%s\n' "Error: invalid column count -- bmtDraw: cols"
+			return 2
+		fi
+		local colwidth=0
+		local item
+		for item in "${items[@]}"; do
+			(( ${#item} > colwidth )) && colwidth=${#item}
+		done
+		(( colwidth += 2 )) # padding between columns
+		local count=0
+		tput setaf "$coloritem"
+		for item in "${items[@]}"; do
+			printf '%-*s' "$colwidth" "$item"
+			(( count++ ))
+			if (( count % numcols == 0 )); then
+				printf '\n'
+			fi
+		done
+		# trailing newline if last row was not full
+		(( count % numcols != 0 )) && printf '\n'
+		tput sgr 0
+		return 0
+	;;
+
+	*) # Catch all users typos
+		printf '%s\n'  "Error: Unknown keyword : bashMultiTool: bmtDraw: bmtDrawFunc"
+		return 255
+	;;
+esac
+}
+

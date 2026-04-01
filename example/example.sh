@@ -8,16 +8,20 @@
 # URL: https://github.com/gavinlyonsrepo/bashmultitool
 
 # Source the library
+# local path for development
+#LIBPATH="./lib/"
+# installed path
 LIBPATH="/usr/lib/bashmultitool/"
 for MYFILE in "$LIBPATH"*;
 do
+	# shellcheck source=/dev/null
 	source "$MYFILE"
 done
-   
+
 function Display_Func
 {
-	bmtMiscFunc title 3 2 '#' "Bashmultitool library Demo"
-	bmtMiscFunc drawbox 3 2 "A file to demo bash library" "Written by Gavin Lyons "
+	bmtDrawFunc title 3 2 '#' "Bashmultitool library Demo"
+	bmtDrawFunc drawbox 3 2 "A file to demo bash library" "Written by Gavin Lyons "
 	bmtPromptFunc anykey "and download files " b_cyan
 	bmtPromptFunc eventstatus "File 1 Download" "OK" b_green
 	bmtPromptFunc eventstatus "File 2 Download" "Fail" b_red

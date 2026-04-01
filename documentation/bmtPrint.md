@@ -1,8 +1,10 @@
+# Section One: Printing
+
 | Library file | Function | Sections | Content | help file |
 | ---- | ---- | ---- | ---- | ---- |
-|  bmtPrint | bmtPrintFunc | 101 | Printing text | bmtPrint.md |
+| bmtPrint | bmtPrintFunc | 101 | Printing text | bmtPrint.md |
 
-**Section One  , Printing**
+## Section One  , Printing sub sections
 
 * 101 Coloured printed text, 8 colours, 7 modes. 56 options in total.
 
@@ -12,12 +14,10 @@ Modes: normal, bold, underline, background, high intensity,
 bold high intensity, background high intensity.  
 
 1. Param1 mode
-2. Param2 text to print(optional can be left out just to change cursor colour 
-for next objects or text printed ) 
+2. Param2 text to print(optional can be left out just to change cursor colour
+for next objects or text printed )
 
-**Sub-Sections**
-
-101) Colored printed text  
+## 101 Colored printed text  
 
 The keyword represent the color, the text to be printed is first option.
 leave text option blank to just change the colour mode of cursor

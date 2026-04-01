@@ -57,28 +57,49 @@ case "$1" in
 	;;
 
 	distrocheck) #402 check what distro on
-			if [ -f /etc/redhat-release ]; then
-				# rpm based
-				return 2
-			elif [ -f /etc/fedora-release ]; then
-				# fedora based
-				return 3
-			elif [ -f /etc/lsb-release ]; then
-				# deb based
-				return 4
-			elif [ -d /etc/pacman.d ]; then
-				# pacman based
-				return 5
-			elif [ -f /etc/gentoo-release ]; then
-				# gentoo based
-				return 6
-			elif [ -f /etc/slackware-release ]; then
-				# slackware based
-				return 7
-			else
-				printf '%s\n' "UnKnown Linux distro"
-				return 52
-			fi
+		# Primary method: /etc/os-release (systemd standard, present on all
+		# modern distros including Raspbian, Ubuntu, Mint, Pop!_OS etc).
+		# ID_LIKE is checked alongside ID so derivatives are correctly detected
+		# e.g. Raspbian has ID=raspbian ID_LIKE=debian, Ubuntu has ID_LIKE=debian.
+		# Fallback: legacy distro-specific release files for older/minimal systems.
+		local distro_id=""
+		local distro_like=""
+		if [ -f /etc/os-release ] ; then
+			# shellcheck source=/dev/null
+			distro_id=$(. /etc/os-release 2>/dev/null && printf '%s' "$ID")
+			# shellcheck source=/dev/null
+			distro_like=$(. /etc/os-release 2>/dev/null && printf '%s' "$ID_LIKE")
+		fi
+		local distro_combined="${distro_id} ${distro_like}"
+		case "$distro_combined" in
+			*fedora*)
+				return 3 ;;  # fedora based (checked before rhel: Fedora sets ID=fedora)
+			*rhel*|*centos*|*"red hat"*|*almalinux*|*rocky*)
+				return 2 ;;  # redhat/rpm based
+			*debian*|*ubuntu*|*raspbian*|*mint*)
+				return 4 ;;  # debian based
+			*arch*|*manjaro*)
+				return 5 ;;  # pacman based
+			*gentoo*)
+				return 6 ;;  # gentoo based
+			*slackware*)
+				return 7 ;;  # slackware based
+		esac
+		# Fallback to legacy release files for older/obscure distros
+		# Note: fedora checked before redhat as Fedora can ship both files
+		if [ -f /etc/fedora-release ] ; then
+			return 3
+		elif [ -f /etc/redhat-release ] ; then
+			return 2
+		elif [ -d /etc/pacman.d ] ; then
+			return 5
+		elif [ -f /etc/gentoo-release ] ; then
+			return 6
+		elif [ -f /etc/slackware-release ] ; then
+			return 7
+		fi
+		printf '%s\n' "UnKnown Linux distro"
+		return 52
 	;;
 
 	isTextEdSet) #403 set text editor
@@ -161,6 +182,56 @@ case "$1" in
 		return 0
 	;;
 	
+	sysinfo) # 409 print a brief system summary
+		# Prints: OS description, kernel version, uptime, CPU model, total RAM.
+		# Param $2: MES (optional) prefix each line with a label for scripting/parsing.
+		local os_desc kernel_ver uptime_str cpu_model total_ram
+		os_desc=$(grep PRETTY_NAME /etc/os-release 2>/dev/null | cut -d= -f2 | tr -d '"')
+		[ -z "$os_desc" ] && os_desc="Unknown OS"
+		kernel_ver=$(uname -r)
+		uptime_str=$(uptime -p 2>/dev/null || uptime)
+		cpu_model=$(grep -m1 "model name" /proc/cpuinfo 2>/dev/null | cut -d: -f2 | sed 's/^ //')
+		[ -z "$cpu_model" ] && cpu_model="Unknown CPU"
+		total_ram=$(awk '/MemTotal/{printf "%.0f MB", $2/1024}' /proc/meminfo 2>/dev/null)
+		[ -z "$total_ram" ] && total_ram="Unknown"
+		if [ "$2" = "MES" ] ; then
+			printf '%s\n' "OS: $os_desc"
+			printf '%s\n' "Kernel: $kernel_ver"
+			printf '%s\n' "Uptime: $uptime_str"
+			printf '%s\n' "CPU: $cpu_model"
+			printf '%s\n' "RAM: $total_ram"
+		else
+			printf '%s\n' "$os_desc"
+			printf '%s\n' "$kernel_ver"
+			printf '%s\n' "$uptime_str"
+			printf '%s\n' "$cpu_model"
+			printf '%s\n' "$total_ram"
+		fi
+		return 0
+	;;
+
+	isrunning) # 410 check if a named process is currently running
+		# Uses pgrep for a case-insensitive full command-line match.
+		# Param2: process name to search for.
+		# Param3: MES (optional) print a result message.
+		# Returns 0 if running, 2 if not found, 1 if no process name supplied.
+		if [ -z "$2" ] ; then
+			printf '%s\n' "${red}Error bmtLinux : isrunning : no process name supplied${normal}"
+			return 1
+		fi
+		if pgrep -ix "$2" >/dev/null 2>&1 ; then
+			if [ "$3" = "MES" ] ; then
+				printf '%s\n' "Process $2 is running"
+			fi
+			return 0
+		else
+			if [ "$3" = "MES" ] ; then
+				printf '%s\n' "${red}Process $2 is not running${normal}"
+			fi
+			return 2
+		fi
+	;;
+
 	*) # Catch all user typos
 		printf '%s\n'  "Error: Unknown keyword : bashmultitool :bmtLinux: bmtLinuxFunc"
 		return 255
